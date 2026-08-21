@@ -1,0 +1,30 @@
+# Node & Next.js
+node_modules/
+.next/
+dist/
+build/
+.turbo/
+
+# Python & UV
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# IDE & OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Upstream reference clone / migrated source (not needed in final monorepo)
+adk-samples/
+Cymbal-Tyres/

@@ -1,0 +1,23 @@
+{
+  "name": "cymbal-agentic-suite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agentic Customer Lifecycle & Revenue Recovery Suite on Google ADK 2.5, Gemini 3.7 Flash, AP2 v0.2, A2A & UCP",
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter @cymbal/storefront dev\" \"pnpm --filter @cymbal/manager-portal dev\" \"cd services/long-horizon-agent && uvicorn horizon.fast_api_app:app --port 8000 --reload\"",
+    "build": "pnpm --recursive run build",
+    "test": "pnpm --recursive run test",
+    "test:policy": "pnpm --filter @cymbal/deterministic-policy test",
+    "test:protocol": "pnpm --filter @cymbal/commerce-protocol test",
+    "test:agent": "cd services/long-horizon-agent && pytest"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.9.3",
+    "vitest": "^3.0.7"
+  }
+}
