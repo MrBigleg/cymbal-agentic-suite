@@ -39,6 +39,8 @@ Cymbal Auto uses a refined slate & electric blue visual language designed for hi
 - **Location**: `/components/ProductCard.tsx`
 - **Features**:
   - Store-aware stock resolution (`product.stockByStore[selectedStoreId]`).
+  - High-resolution studio product imagery with enlarged display container and drop-shadows.
+  - Interactive **Tyre vs Fitted Alloy Wheel** preview toggle (`Tyre` unmounted Style A vs `Wheel` package Style C).
   - EU Tyre Ratings Badge (`TyreBadge.tsx` displaying Fuel, Wet Grip, Noise dB).
   - Out of stock branch: automatically renders the `Buy when back in stock` CTA linking to `IntentModal.tsx`.
   - In-stock branch: renders the `Add to Basket` button with quick feedback.

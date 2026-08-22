@@ -35,6 +35,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [isIntentModalOpen, setIsIntentModalOpen] = useState(false);
   const [isStoreModalOpen, setIsStoreModalOpen] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+  const [viewPackage, setViewPackage] = useState(false);
 
   const product = products.find((p) => p.id === resolvedParams.id);
 
@@ -53,6 +54,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       </div>
     );
   }
+
+  const currentImage = viewPackage && product.wheelPackageImage ? product.wheelPackageImage : product.image;
 
   const stockInfo = product.stockByStore[selectedStoreId] || {
     state: 'Out of Stock',
@@ -100,7 +103,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 flex items-center justify-center relative overflow-hidden shadow-xs">
             <div className="relative h-72 sm:h-96 w-full flex items-center justify-center">
               <Image
-                src={product.image}
+                src={currentImage}
                 alt={product.name}
                 width={500}
                 height={500}
@@ -121,6 +124,34 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </span>
               )}
             </div>
+
+            {/* View Mode Toggle (Tyre vs Fitted Alloy Wheel) */}
+            {product.wheelPackageImage && (
+              <div className="absolute bottom-4 right-4 flex bg-white/95 dark:bg-slate-800/95 backdrop-blur-xs border border-slate-200 dark:border-slate-700 rounded-xl p-1 shadow-md text-xs font-bold">
+                <button
+                  type="button"
+                  onClick={() => setViewPackage(false)}
+                  className={`px-3 py-1.5 rounded-lg transition-all ${
+                    !viewPackage
+                      ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                  }`}
+                >
+                  Tyre Only
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewPackage(true)}
+                  className={`px-3 py-1.5 rounded-lg transition-all ${
+                    viewPackage
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                  }`}
+                >
+                  Fitted Alloy Wheel
+                </button>
+              </div>
+            )}
           </div>
 
           {/* EU Tyre Label Spec Box */}

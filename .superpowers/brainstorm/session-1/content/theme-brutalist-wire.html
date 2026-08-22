@@ -1,0 +1,317 @@
+<style>
+  :root {
+    --bg-canvas: #060913;
+    --bg-surface: #0c1222;
+    --bg-surface-elevated: #111a30;
+    --bg-surface-accent: #172342;
+    --border-wire: #1e293b;
+    --border-wire-focus: #38bdf8;
+    --border-wire-accent: #0284c7;
+    --cyan-glow: #38bdf8;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-subtle: #64748b;
+    --shadow-hard: 4px 4px 0px #020617;
+    --shadow-hard-sm: 2px 2px 0px #020617;
+    --shadow-hard-cyan: 4px 4px 0px #0369a1;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  /* Asymmetric Signature Box: Sharp Bottom-Left Corner */
+  .box-asym {
+    border-radius: 20px 20px 20px 0px;
+    border: 1.5px solid var(--border-wire);
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-hard);
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .box-asym-sm {
+    border-radius: 12px 12px 12px 0px;
+    border: 1px solid var(--border-wire);
+    background: var(--bg-surface-elevated);
+    box-shadow: var(--shadow-hard-sm);
+  }
+
+  .box-asym-btn {
+    border-radius: 10px 10px 10px 0px;
+    border: 1.5px solid #0284c7;
+    background: #0284c7;
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 3px 3px 0px #082f49;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .box-asym-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px #082f49;
+    background: #0369a1;
+  }
+  .box-asym-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #082f49;
+  }
+
+  .box-asym:hover {
+    border-color: #38bdf8;
+  }
+
+  /* Monospace Technical Tags & Stamps */
+  .tech-tag {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 6px 6px 6px 0px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border-wire);
+    background: #080d1a;
+  }
+
+  .tech-stamp {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #f59e0b;
+    color: #020617;
+    padding: 2px 6px;
+    border-radius: 4px 4px 4px 0px;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+  }
+
+  /* Wire Stat Matrix */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .stat-cell {
+    border: 1px solid var(--border-wire);
+    border-radius: 10px 10px 10px 0px;
+    background: #090e1c;
+    padding: 10px 8px;
+    text-align: center;
+    box-shadow: 2px 2px 0px #020617;
+  }
+  .stat-cell .num {
+    font-family: ui-monospace, monospace;
+    font-size: 18px;
+    font-weight: 800;
+    color: #f8fafc;
+  }
+  .stat-cell .lbl {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* Layout grid */
+  .demo-columns {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  @media (max-width: 900px) {
+    .demo-columns { grid-template-columns: 1fr; }
+  }
+
+  .plate-box {
+    background: #f59e0b;
+    color: #020617;
+    font-family: ui-monospace, monospace;
+    font-weight: 900;
+    padding: 8px 14px;
+    border-radius: 8px 8px 8px 0px;
+    border: 2px solid #000000;
+    box-shadow: 3px 3px 0px #020617;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+  }
+
+  .wire-divider {
+    height: 1px;
+    background: var(--border-wire);
+    margin: 14px 0;
+  }
+</style>
+
+<h2>Wiry Neo-Brutalist Slate & Asymmetric Corner System</h2>
+<p class="subtitle">Applying the sharp bottom-left signature geometry, flat technical surfaces, 1.5px wireframes, hard offset shadows, and monospace audit ledger cues.</p>
+
+<div class="demo-columns">
+
+  <!-- LEFT: Storefront Product & Fitting Card -->
+  <div class="box-asym" style="padding: 24px;">
+    <!-- Top Ledger Bar -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <div class="tech-tag" style="color: #38bdf8; border-color: #0284c7;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #38bdf8; display: inline-block;"></span>
+        CYMBAL STOREFRONT // DEPOT_01_BHM
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <span class="tech-stamp">FITTING BAY /_04</span>
+        <span class="tech-tag" style="color: #64748b;">rev 9f82d1</span>
+      </div>
+    </div>
+
+    <!-- Main Product Header -->
+    <div style="display: flex; gap: 16px; align-items: flex-start;">
+      <!-- Asymmetric Score / Spec Callout Box -->
+      <div class="box-asym-sm" style="padding: 12px 16px; text-align: center; min-width: 80px; border-color: #0284c7; background: #081126;">
+        <div style="font-family: ui-monospace, monospace; font-size: 24px; font-weight: 900; color: #38bdf8; line-height: 1;">A+</div>
+        <div style="font-size: 9px; font-weight: 700; color: #64748b; margin-top: 4px; text-transform: uppercase;">Wet Grip</div>
+      </div>
+
+      <div style="flex: 1;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <h3 style="margin: 0; font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: -0.02em;">Goodyear Eagle F1</h3>
+          <div style="font-family: ui-monospace, monospace; font-size: 22px; font-weight: 900; color: #38bdf8;">£142.50</div>
+        </div>
+        <div style="color: #94a3b8; font-size: 13px; margin-top: 4px; font-weight: 500;">
+          Asymmetric 6 • 225/45 R17 91Y XL (FP)
+        </div>
+        <div style="display: flex; gap: 6px; margin-top: 8px;">
+          <span class="tech-tag" style="color: #10b981; border-color: #064e3b; background: #022c22;">● 8 in stock (Depot)</span>
+          <span class="tech-tag" style="color: #cbd5e1;">Fuel B</span>
+          <span class="tech-tag" style="color: #cbd5e1;">Noise 70dB</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wire-divider"></div>
+
+    <!-- Vehicle Association & Booking Wireframe -->
+    <div style="background: #090e1c; border: 1px solid var(--border-wire); border-radius: 12px 12px 12px 0px; padding: 14px; margin-bottom: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;">Matched Vehicle</div>
+          <div style="font-size: 13px; font-weight: 700; color: #ffffff; margin-top: 2px;">BMW 3 Series (320d M Sport 2021)</div>
+        </div>
+        <div class="plate-box">
+          <span style="font-size: 10px; background: #1d4ed8; color: #ffffff; padding: 2px 4px; border-radius: 2px;">UK</span>
+          <span>EA71 BHM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Bar -->
+    <div style="display: flex; gap: 10px;">
+      <button class="box-asym-btn" style="flex: 1; padding: 12px; font-size: 13px;">
+        ⚡ Book Fitting & Reserve Tyre
+      </button>
+      <button style="border-radius: 10px 10px 10px 0px; border: 1.5px solid var(--border-wire); background: #090e1c; color: #cbd5e1; padding: 12px 16px; font-weight: 700; font-size: 13px; cursor: pointer; box-shadow: 2px 2px 0px #020617;">
+        AP2 Pre-Auth
+      </button>
+    </div>
+  </div>
+
+  <!-- RIGHT: Manager Incident & Audit Ledger Card (matching your screenshot aesthetic) -->
+  <div class="box-asym" style="padding: 24px;">
+    <!-- Top Audit Ledger Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <div class="tech-tag" style="color: #10b981; border-color: #059669;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+        AUTOCENTRE AUDIT LEDGER • DEPOT INSPECTION
+      </div>
+      <div style="display: flex; gap: 6px;">
+        <span class="tech-stamp" style="background: #38bdf8; color: #020617;">INSPECT /_03</span>
+      </div>
+    </div>
+
+    <!-- Title & Score Block -->
+    <div style="display: flex; gap: 16px; align-items: flex-start;">
+      <!-- Score Pill -->
+      <div class="box-asym-sm" style="padding: 14px 18px; text-align: center; min-width: 85px; background: #090f20; border-color: #38bdf8; box-shadow: 3px 3px 0px #020617;">
+        <div style="font-family: ui-monospace, monospace; font-size: 28px; font-weight: 900; color: #f8fafc; line-height: 1;">88</div>
+        <div style="font-size: 9px; font-weight: 700; color: #64748b; margin-top: 4px; text-transform: uppercase;">/100 PTS</div>
+      </div>
+
+      <div style="flex: 1;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <h3 style="margin: 0; font-size: 19px; font-weight: 800; color: #ffffff;">Depot Stock & Fitting Health</h3>
+          <button class="box-asym-btn" style="padding: 6px 12px; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;">
+            ▶ Run Audit
+          </button>
+        </div>
+        <div class="tech-tag" style="margin-top: 6px; font-size: 10px; color: #94a3b8;">
+          Updated 22 Aug 2026 • +12 after last cycle
+        </div>
+      </div>
+    </div>
+
+    <!-- Policy Description Box -->
+    <div style="background: #090e1c; border: 1px solid var(--border-wire); border-radius: 10px 10px 10px 0px; padding: 12px; margin: 16px 0; font-size: 12px; color: #94a3b8; line-height: 1.5;">
+      <div style="display: flex; gap: 8px; margin-bottom: 6px;">
+        <span class="tech-tag" style="font-size: 10px; color: #cbd5e1;">A2A Protocol</span>
+        <span class="tech-tag" style="font-size: 10px; color: #64748b;">rev c31a89f</span>
+      </div>
+      Deterministic policy agent auto-resolves out-of-stock tire inquiries, verifies AP2 pre-authorization caps, and schedules bay bookings in the Birmingham depot.
+    </div>
+
+    <!-- 5-Column Status Matrix -->
+    <div class="stat-grid">
+      <div class="stat-cell" style="border-color: #059669;">
+        <div class="num" style="color: #10b981;">24</div>
+        <div class="lbl">Pass</div>
+      </div>
+      <div class="stat-cell" style="border-color: #dc2626;">
+        <div class="num" style="color: #ef4444;">1</div>
+        <div class="lbl">Fail</div>
+      </div>
+      <div class="stat-cell" style="border-color: #d97706;">
+        <div class="num" style="color: #f59e0b;">3</div>
+        <div class="lbl">Needs input</div>
+      </div>
+      <div class="stat-cell">
+        <div class="num" style="color: #94a3b8;">0</div>
+        <div class="lbl">Risk</div>
+      </div>
+      <div class="stat-cell">
+        <div class="num" style="color: #64748b;">0</div>
+        <div class="lbl">Blocked</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- System Rules Breakdown -->
+<div class="box-asym" style="padding: 20px; background: #080d1a; border-color: #0284c7;">
+  <h4 style="margin: 0 0 10px 0; color: #38bdf8; font-size: 15px; font-weight: 800; letter-spacing: -0.01em;">
+    📐 Codified "Wiry Brutalist Slate" Rules for design.md
+  </h4>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; font-size: 12px; color: #cbd5e1;">
+    <div>
+      <strong style="color: #ffffff;">1. Asymmetric Corner Radius</strong><br/>
+      <code>border-radius: [T] [T] [T] 0px</code> (e.g. <code>20px 20px 20px 0px</code> on containers, <code>10px 10px 10px 0px</code> on buttons, <code>6px 6px 6px 0px</code> on tags).
+    </div>
+    <div>
+      <strong style="color: #ffffff;">2. Crisp 1.5px Wiry Borders & Hard Shadows</strong><br/>
+      Crisp solid borders (no blurry multi-color glows). Hard offset drop shadows: <code>box-shadow: 4px 4px 0px #020617</code>.
+    </div>
+    <div>
+      <strong style="color: #ffffff;">3. Flat Surfaces (No Internal Card Gradients)</strong><br/>
+      Pure flat slate layers (<code>#060913</code> canvas, <code>#0c1222</code> surface, <code>#111a30</code> elevated). Gradients reserved only for background ambiance.
+    </div>
+    <div>
+      <strong style="color: #ffffff;">4. Monospace Audit Stamping</strong><br/>
+      Technical metadata pills (<code>INSPECT /_03</code>, <code>rev b8b58fb</code>, <code>DEPOT_BHM</code>) across Storefront, Manager Portal, and Google Chat Cards.
+    </div>
+  </div>
+</div>

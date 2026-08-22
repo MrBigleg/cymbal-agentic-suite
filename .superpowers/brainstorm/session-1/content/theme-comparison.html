@@ -1,0 +1,356 @@
+<style>
+  .theme-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin: 24px 0;
+  }
+  .theme-card-option {
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .theme-card-option:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* Style A: Full Obsidian & Electric Cyan Rim Light */
+  .style-a {
+    background: radial-gradient(circle at 50% 0%, #0f172a 0%, #030712 100%);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px -5px rgba(6, 182, 212, 0.2);
+  }
+  .style-a:hover, .style-a.selected {
+    border-color: #38bdf8;
+    box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.9), 0 0 35px 2px rgba(56, 189, 248, 0.35);
+  }
+
+  /* Style B: Brushed Slate & Sapphire Studio */
+  .style-b {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px -3px rgba(59, 130, 246, 0.15);
+  }
+  .style-b:hover, .style-b.selected {
+    border-color: #60a5fa;
+    box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.8), 0 0 30px 2px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Style C: Hybrid Obsidian with Ice Accents */
+  .style-c {
+    background: linear-gradient(145deg, #090d16 0%, #111827 100%);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+  }
+  .style-c:hover, .style-c.selected {
+    border-color: #94a3b8;
+    box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.9), 0 0 25px 0 rgba(148, 163, 184, 0.25);
+  }
+
+  /* Mini Mockup Canvas */
+  .mock-canvas {
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mock-canvas-a {
+    background: #020617;
+    border: 1px solid rgba(15, 23, 42, 0.8);
+  }
+  .mock-canvas-b {
+    background: #0b1120;
+    border: 1px solid rgba(30, 41, 59, 0.8);
+  }
+  .mock-canvas-c {
+    background: #030712;
+    border: 1px solid rgba(31, 41, 55, 0.8);
+  }
+
+  /* Product Preview Tile */
+  .mock-product-tile {
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tile-a {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .tile-b {
+    background: #1e293b;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  .tile-c {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* Reflective Tyre Podium */
+  .tyre-podium {
+    height: 100px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .podium-a {
+    background: radial-gradient(ellipse at center 80%, rgba(6, 182, 212, 0.22) 0%, rgba(2, 6, 23, 0.95) 75%);
+    border-bottom: 2px solid #06b6d4;
+  }
+  .podium-b {
+    background: radial-gradient(ellipse at center 80%, rgba(59, 130, 246, 0.2) 0%, rgba(15, 23, 42, 0.95) 75%);
+    border-bottom: 2px solid #3b82f6;
+  }
+  .podium-c {
+    background: radial-gradient(ellipse at center 80%, rgba(148, 163, 184, 0.15) 0%, rgba(3, 7, 18, 0.95) 75%);
+    border-bottom: 2px solid #64748b;
+  }
+
+  .tyre-graphic {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: -0.5px;
+  }
+  .tyre-graphic-a {
+    background: radial-gradient(circle, #0f172a 35%, #020617 75%, #06b6d4 100%);
+    border: 3px solid #1e293b;
+    box-shadow: 0 0 18px rgba(6, 182, 212, 0.6), inset 0 0 10px rgba(56, 189, 248, 0.5);
+    color: #38bdf8;
+  }
+  .tyre-graphic-b {
+    background: radial-gradient(circle, #1e293b 35%, #0f172a 75%, #3b82f6 100%);
+    border: 3px solid #334155;
+    box-shadow: 0 0 14px rgba(59, 130, 246, 0.5), inset 0 0 8px rgba(96, 165, 250, 0.4);
+    color: #93c5fd;
+  }
+  .tyre-graphic-c {
+    background: radial-gradient(circle, #1f2937 35%, #111827 75%, #94a3b8 100%);
+    border: 3px solid #374151;
+    box-shadow: 0 0 10px rgba(148, 163, 184, 0.3);
+    color: #e2e8f0;
+  }
+
+  .badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .badge-cyan {
+    background: rgba(6, 182, 212, 0.15);
+    color: #22d3ee;
+    border: 1px solid rgba(6, 182, 212, 0.4);
+  }
+  .badge-blue {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.35);
+  }
+  .badge-slate {
+    background: rgba(148, 163, 184, 0.12);
+    color: #cbd5e1;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+  }
+
+  .btn-glow {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    transition: all 0.2s ease;
+  }
+  .btn-glow-a {
+    background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(6, 182, 212, 0.4);
+  }
+  .btn-glow-b {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+  }
+  .btn-glow-c {
+    background: #334155;
+    color: #f8fafc;
+    border: 1px solid #475569;
+  }
+</style>
+
+<h2>Theme Exploration: Style B (Dramatic Slate & Blue Rim Light)</h2>
+<p class="subtitle">Select the visual intensity and atmosphere that will anchor the comprehensive design system across the Storefront, Manager Portal, and Visual Assets.</p>
+
+<div class="theme-preview-grid">
+
+  <!-- Option A -->
+  <div class="theme-card-option style-a" data-choice="style-a" onclick="toggleSelect(this)">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <span class="badge-pill badge-cyan">Recommended Flagship</span>
+        <h3 style="margin: 8px 0 4px 0; color: #f8fafc; font-size: 18px;">Electric Obsidian & Cyan Rim</h3>
+        <p style="margin: 0; color: #94a3b8; font-size: 12px;">Ultra-dark slate canvas, sharp cyan/electric blue rim lighting, glassmorphic sheen.</p>
+      </div>
+      <div class="letter" style="background: rgba(6,182,212,0.2); color: #38bdf8; border: 1px solid #06b6d4; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">A</div>
+    </div>
+
+    <!-- Live Mock Preview -->
+    <div class="mock-canvas mock-canvas-a">
+      <div class="mock-product-tile tile-a">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="badge-pill badge-cyan">In Stock • Bay Ready</span>
+          <span style="color: #38bdf8; font-size: 12px; font-weight: 800;">£142.50</span>
+        </div>
+
+        <div class="tyre-podium podium-a">
+          <div class="tyre-graphic tyre-graphic-a">CYMBAL</div>
+        </div>
+
+        <div>
+          <div style="color: #ffffff; font-size: 13px; font-weight: 700;">Eagle F1 Asymmetric 6</div>
+          <div style="color: #64748b; font-size: 11px;">225/45 R17 91Y • Wet Grip A</div>
+        </div>
+
+        <button class="btn-glow btn-glow-a">⚡ Instant Fitting Booking</button>
+      </div>
+    </div>
+
+    <div class="pros-cons" style="margin-top: 4px;">
+      <div class="pros" style="background: rgba(6,182,212,0.06); border-left: 3px solid #06b6d4; padding: 8px 12px; border-radius: 4px;">
+        <div style="font-weight: 700; color: #38bdf8; font-size: 11px;">Strengths</div>
+        <ul style="margin: 4px 0 0 16px; color: #cbd5e1; font-size: 11px; padding: 0;">
+          <li>Maximum visual "WOW" factor and premium supercar aesthetic</li>
+          <li>Matches dramatic reflective tyre rendering perfectly</li>
+          <li>High-contrast status signals (emerald/amber/rose pop against slate)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="theme-card-option style-b" data-choice="style-b" onclick="toggleSelect(this)">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <span class="badge-pill badge-blue">Studio Deep Navy</span>
+        <h3 style="margin: 8px 0 4px 0; color: #f8fafc; font-size: 18px;">Sapphire Slate Studio</h3>
+        <p style="margin: 0; color: #94a3b8; font-size: 12px;">Brushed deep navy/slate, subtle cobalt specular rim, softer ambient glow.</p>
+      </div>
+      <div class="letter" style="background: rgba(59,130,246,0.2); color: #60a5fa; border: 1px solid #3b82f6; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">B</div>
+    </div>
+
+    <!-- Live Mock Preview -->
+    <div class="mock-canvas mock-canvas-b">
+      <div class="mock-product-tile tile-b">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="badge-pill badge-blue">In Stock • Depot</span>
+          <span style="color: #60a5fa; font-size: 12px; font-weight: 800;">£142.50</span>
+        </div>
+
+        <div class="tyre-podium podium-b">
+          <div class="tyre-graphic tyre-graphic-b">CYMBAL</div>
+        </div>
+
+        <div>
+          <div style="color: #ffffff; font-size: 13px; font-weight: 700;">Eagle F1 Asymmetric 6</div>
+          <div style="color: #94a3b8; font-size: 11px;">225/45 R17 91Y • Wet Grip A</div>
+        </div>
+
+        <button class="btn-glow btn-glow-b">Select Store & Fit</button>
+      </div>
+    </div>
+
+    <div class="pros-cons" style="margin-top: 4px;">
+      <div class="pros" style="background: rgba(59,130,246,0.06); border-left: 3px solid #3b82f6; padding: 8px 12px; border-radius: 4px;">
+        <div style="font-weight: 700; color: #60a5fa; font-size: 11px;">Strengths</div>
+        <ul style="margin: 4px 0 0 16px; color: #cbd5e1; font-size: 11px; padding: 0;">
+          <li>Corporate automotive polish with softer contrast transitions</li>
+          <li>Very easy on eyes for lengthy data/manager portal workflows</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="theme-card-option style-c" data-choice="style-c" onclick="toggleSelect(this)">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <span class="badge-pill badge-slate">Technical Minimalist</span>
+        <h3 style="margin: 8px 0 4px 0; color: #f8fafc; font-size: 18px;">Graphite & Cyber Silver</h3>
+        <p style="margin: 0; color: #94a3b8; font-size: 12px;">Charcoal graphite backgrounds, frosted silver edges, minimal cyan accents.</p>
+      </div>
+      <div class="letter" style="background: rgba(148,163,184,0.2); color: #cbd5e1; border: 1px solid #94a3b8; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">C</div>
+    </div>
+
+    <!-- Live Mock Preview -->
+    <div class="mock-canvas mock-canvas-c">
+      <div class="mock-product-tile tile-c">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="badge-pill badge-slate">In Stock</span>
+          <span style="color: #f1f5f9; font-size: 12px; font-weight: 800;">£142.50</span>
+        </div>
+
+        <div class="tyre-podium podium-c">
+          <div class="tyre-graphic tyre-graphic-c">CYMBAL</div>
+        </div>
+
+        <div>
+          <div style="color: #ffffff; font-size: 13px; font-weight: 700;">Eagle F1 Asymmetric 6</div>
+          <div style="color: #94a3b8; font-size: 11px;">225/45 R17 91Y • Wet Grip A</div>
+        </div>
+
+        <button class="btn-glow btn-glow-c">View Specifications</button>
+      </div>
+    </div>
+
+    <div class="pros-cons" style="margin-top: 4px;">
+      <div class="pros" style="background: rgba(148,163,184,0.06); border-left: 3px solid #94a3b8; padding: 8px 12px; border-radius: 4px;">
+        <div style="font-weight: 700; color: #cbd5e1; font-size: 11px;">Strengths</div>
+        <ul style="margin: 4px 0 0 16px; color: #cbd5e1; font-size: 11px; padding: 0;">
+          <li>Understated, restrained technical look</li>
+          <li>Focuses almost entirely on typographic density</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="margin-top: 24px; padding: 16px; background: rgba(15,23,42,0.6); border: 1px solid rgba(56,189,248,0.2); border-radius: 12px;">
+  <h4 style="margin: 0 0 8px 0; color: #38bdf8; font-size: 14px;">🎯 Implementation in design.md</h4>
+  <p style="margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.6;">
+    Once you select an option, we will codify its exact token system into <code>design.md</code>:
+    <br/>• <strong>Backgrounds:</strong> Canvas, Elevated Cards, Floating Modals, Glossy Podiums
+    <br/>• <strong>Lighting & Borders:</strong> Primary Rim Glow, Subtle Ambient Sheen, Inset Highlights
+    <br/>• <strong>Semantic Signals:</strong> Stock Badges, AP2 Protocol Triggers, UK Reg Plate yellow styling
+    <br/>• <strong>Multi-Channel:</strong> Storefront Web UI, Manager Portal Dashboard, Google Chat Cards, AI Asset Prompts
+  </p>
+</div>
