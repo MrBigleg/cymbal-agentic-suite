@@ -1,4 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
+
+/**
+ * Validates HMAC-SHA256 signature over the raw webhook payload.
+ */
+function verifyUcpSignature(rawBody: string, signature: string | null, secret: string): boolean {
+  if (!signature || !secret) return false;
+  try {
+    const computedHmac = crypto.createHmac('sha256', secret).update(rawBody).digest('hex');
+    const signatureBuffer = Buffer.from(signature.replace(/^sha256=/, ''), 'hex');
+    const computedBuffer = Buffer.from(computedHmac, 'hex');
+
+    if (signatureBuffer.length !== computedBuffer.length) {
+      return false;
+    }
+    return crypto.timingSafeEqual(signatureBuffer, computedBuffer);
+  } catch {
+    return false;
+  }
+}
 
 /**
  * UCP INBOUND WEBHOOK HANDLER
@@ -9,7 +29,37 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(req: NextRequest) {
   try {
     const signature = req.headers.get('x-ucp-signature');
-    const event = await req.json();
+    const rawBody = await req.text();
+
+    // In production or when UCP_WEBHOOK_SECRET is set, strictly enforce signature verification.
+    // In local evaluation mode without an explicit secret, fallback to demo verification mode.
+    const webhookSecret = process.env.UCP_WEBHOOK_SECRET || 'cymbal_demo_ucp_secret_2026';
+    const isEnforced = process.env.NODE_ENV === 'production' || process.env.ENFORCE_WEBHOOK_SIGNATURES === 'true';
+
+    if (signature) {
+      const isValid = verifyUcpSignature(rawBody, signature, webhookSecret);
+      if (!isValid && isEnforced) {
+        return NextResponse.json(
+          { error: 'Unauthorized: Invalid UCP webhook signature' },
+          { status: 401 }
+        );
+      }
+    } else if (isEnforced) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Missing x-ucp-signature header' },
+        { status: 401 }
+      );
+    }
+
+    let event: any;
+    try {
+      event = JSON.parse(rawBody);
+    } catch {
+      return NextResponse.json(
+        { error: 'Invalid JSON payload structure' },
+        { status: 400 }
+      );
+    }
 
     console.log('[UCP Webhook Received]:', event.type || event.eventType, event);
 
@@ -47,8 +97,9 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     console.error('Error processing UCP webhook:', error);
     return NextResponse.json(
-      { error: error.message || 'Internal server error processing webhook' },
+      { error: 'Internal server error processing webhook' },
       { status: 500 }
     );
   }
 }
+

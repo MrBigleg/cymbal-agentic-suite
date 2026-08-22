@@ -171,8 +171,11 @@ export class CymbalAgentToolDispatcher {
     switch (name) {
       case 'getStockLevels': {
         const { productId, storeId } = args;
+        if (!productId || typeof productId !== 'string') {
+          return { error: 'Invalid productId parameter' };
+        }
         if (storeId) {
-          return await this.inventoryProvider.getStock(productId, storeId);
+          return await this.inventoryProvider.getStock(productId, String(storeId));
         }
         const product = await this.commerceService.getProductById(productId);
         return product ? product.stockByStore : { error: 'Product not found' };
@@ -180,51 +183,77 @@ export class CymbalAgentToolDispatcher {
 
       case 'replenishStock': {
         const { productId, storeId, quantity } = args;
-        return await this.inventoryProvider.replenishStock(productId, storeId, Number(quantity));
+        const qtyNum = Number(quantity);
+        if (!productId || !storeId || isNaN(qtyNum) || qtyNum <= 0 || qtyNum > 500) {
+          return { error: 'Invalid replenish parameters: quantity must be between 1 and 500' };
+        }
+        return await this.inventoryProvider.replenishStock(String(productId), String(storeId), qtyNum);
       }
 
       case 'getPendingPurchaseIntents': {
         const { productId, storeId } = args;
         return await this.intentRepo.getIntents({
-          productId,
-          storeId,
+          productId: productId ? String(productId) : undefined,
+          storeId: storeId ? String(storeId) : undefined,
           status: 'PENDING_STOCK',
         });
       }
 
       case 'fulfillPurchaseIntent': {
         const { intentId, fulfillmentNote } = args;
+        if (!intentId || typeof intentId !== 'string') {
+          return { error: 'Invalid intentId parameter' };
+        }
         return await this.intentRepo.updateIntentStatus(
           intentId,
           'fulfilled',
-          fulfillmentNote || 'Fulfilled by Google ADK Agent'
+          fulfillmentNote ? String(fulfillmentNote).slice(0, 200) : 'Fulfilled by Google ADK Agent'
         );
       }
 
       case 'applyCheckoutRecovery': {
         const { checkoutId, discountPercent, recoveryMessage } = args;
+        if (!checkoutId || typeof checkoutId !== 'string') {
+          return { error: 'Invalid checkoutId parameter' };
+        }
+        // Enforce hard 10% ceiling discount guard from deterministic policy
+        const requestedDiscount = Number(discountPercent) || 5;
+        const safeDiscount = Math.min(Math.max(requestedDiscount, 1), 10);
+
         return await this.commerceService.markCheckoutRecovered(
           checkoutId,
-          discountPercent,
-          recoveryMessage
+          safeDiscount,
+          recoveryMessage ? String(recoveryMessage).slice(0, 300) : 'Special recovery incentive applied.'
         );
       }
 
       case 'evaluateTyreSuitabilityGrounded': {
         const { query, selectedStoreId } = args;
+        if (!query || typeof query !== 'string') {
+          return { error: 'Query is required for suitability evaluation' };
+        }
         const res = await fetch('/api/assistant/consult', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query, selectedStoreId, requireStrictGrounding: true }),
+          body: JSON.stringify({ query: String(query).slice(0, 500), selectedStoreId, requireStrictGrounding: true }),
         });
         return await res.json();
       }
 
       case 'escalateToHumanTechnician': {
+        const { reason, customerName, customerPhone, preferredDepot } = args;
+        if (!reason || !preferredDepot) {
+          return { error: 'Reason and preferredDepot are required for escalation' };
+        }
         const res = await fetch('/api/assistant/escalate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(args),
+          body: JSON.stringify({
+            reason: String(reason).slice(0, 300),
+            customerName: customerName ? String(customerName).slice(0, 100) : undefined,
+            customerPhone: customerPhone ? String(customerPhone).slice(0, 30) : undefined,
+            storeId: String(preferredDepot).slice(0, 50),
+          }),
         });
         return await res.json();
       }

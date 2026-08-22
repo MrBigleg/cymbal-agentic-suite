@@ -8,22 +8,38 @@ export interface ExperienceIncident {
   portalUrl: string;
 }
 
+/**
+ * Escapes HTML entities to prevent formatting injection or tag breakage in Google Chat cards.
+ */
+export function escapeHtml(str: string = ""): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 export function buildExperienceAlertCard(incident: ExperienceIncident) {
+  const safeStoreName = escapeHtml(incident.storeName);
+  const safeFeedback = escapeHtml(incident.feedback || "No additional feedback provided.");
+  const safeIncidentId = escapeHtml(incident.incidentId);
+
   return {
     cardsV2: [
       {
-        cardId: incident.incidentId,
+        cardId: safeIncidentId,
         card: {
           header: {
-            title: `⚠️ ${incident.storeName} Experience Alert`,
-            subtitle: `Detractor Survey: ${incident.rating}/10`,
+            title: `⚠️ ${safeStoreName} Experience Alert`,
+            subtitle: `Detractor Survey: ${incident.rating ?? "N/A"}/10`,
           },
           sections: [
             {
               widgets: [
                 {
                   textParagraph: {
-                    text: `<b>Feedback:</b> "${incident.feedback}"`,
+                    text: `<b>Feedback:</b> "${safeFeedback}"`,
                   },
                 },
                 {
@@ -34,7 +50,7 @@ export function buildExperienceAlertCard(incident: ExperienceIncident) {
                         onClick: {
                           action: {
                             function: "handleInvestigate",
-                            parameters: [{ key: "incidentId", value: incident.incidentId }],
+                            parameters: [{ key: "incidentId", value: safeIncidentId }],
                           },
                         },
                       },
@@ -43,7 +59,7 @@ export function buildExperienceAlertCard(incident: ExperienceIncident) {
                         onClick: {
                           action: {
                             function: "handleAssign",
-                            parameters: [{ key: "incidentId", value: incident.incidentId }],
+                            parameters: [{ key: "incidentId", value: safeIncidentId }],
                           },
                         },
                       },
@@ -52,7 +68,7 @@ export function buildExperienceAlertCard(incident: ExperienceIncident) {
                         onClick: {
                           action: {
                             function: "handleDismiss",
-                            parameters: [{ key: "incidentId", value: incident.incidentId }],
+                            parameters: [{ key: "incidentId", value: safeIncidentId }],
                           },
                         },
                       },
@@ -69,14 +85,19 @@ export function buildExperienceAlertCard(incident: ExperienceIncident) {
 }
 
 export function buildResolvedCard(incident: ExperienceIncident) {
+  const safeStoreName = escapeHtml(incident.storeName);
+  const safeStatus = escapeHtml(incident.status || "Investigating");
+  const safeAssigned = escapeHtml(incident.assignedTo || "Unassigned");
+  const safeIncidentId = escapeHtml(incident.incidentId);
+
   return {
     cardsV2: [
       {
-        cardId: incident.incidentId,
+        cardId: safeIncidentId,
         card: {
           header: {
-            title: `⚠️ ${incident.storeName} Experience Alert`,
-            subtitle: `Status: ✓ ${incident.status} (Assigned: ${incident.assignedTo})`,
+            title: `⚠️ ${safeStoreName} Experience Alert`,
+            subtitle: `Status: ✓ ${safeStatus} (Assigned: ${safeAssigned})`,
           },
           sections: [
             {
@@ -108,3 +129,4 @@ export function buildResolvedCard(incident: ExperienceIncident) {
     ],
   };
 }
+
