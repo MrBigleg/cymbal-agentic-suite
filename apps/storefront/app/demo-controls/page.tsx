@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Play, Sparkles, AlertTriangle, ShoppingCart, PackageCheck, CheckCircle2 } from "lucide-react";
+import { Play, Sparkles, AlertTriangle, ShoppingCart, PackageCheck, CheckCircle2, Sliders } from "lucide-react";
 
 export default function DemoControlsPage() {
-  const [activeTab, setActiveTab] = useState<"cart" | "stock" | "survey">("cart");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const triggerCartStalling = () => {
@@ -20,59 +19,98 @@ export default function DemoControlsPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <div className="border-b pb-4">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-6 h-6 text-amber-500" />
-          <h1 className="text-2xl font-bold text-gray-900">Hackathon Live Demo Control Center</h1>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      {/* Header */}
+      <div className="cymbal-box-lg p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="cymbal-stamp bg-amber-400 text-[#020617]">LIVE SIMULATOR</span>
+            <span className="font-mono text-[10px] uppercase font-bold text-slate-400">
+              AGENTIC PROTOCOL TRIGGERS
+            </span>
+          </div>
+          <h1 className="text-xl sm:text-2xl font-black text-white uppercase mt-1 tracking-tight flex items-center gap-2">
+            <Sliders className="w-6 h-6 text-[#38bdf8]" />
+            Competition Live Demo Control Center
+          </h1>
+          <p className="text-xs text-slate-400 mt-0.5 font-mono">
+            Simulate real-time events across the 3 autonomous customer lifecycle loops.
+          </p>
         </div>
-        <p className="text-sm text-gray-500 mt-1">Simulate real-time events across the 3 autonomous customer lifecycle loops</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Simulator Trigger Buttons */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <button
           onClick={triggerCartStalling}
-          className="p-5 border rounded-xl bg-white hover:border-blue-500 hover:shadow-md transition text-left space-y-2 group"
+          className="cymbal-box-lg p-5 text-left space-y-3 hover:border-[#0284c7] transition-all group"
         >
           <div className="flex items-center justify-between">
-            <ShoppingCart className="w-6 h-6 text-blue-600" />
-            <Play className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
+            <div className="w-10 h-10 rounded-t-lg rounded-br-lg rounded-bl-none bg-[#111a30] border border-[#0284c7] flex items-center justify-center text-[#38bdf8]">
+              <ShoppingCart className="w-5 h-5" />
+            </div>
+            <Play className="w-4 h-4 text-slate-500 group-hover:text-[#38bdf8] transition-colors" />
           </div>
-          <h3 className="font-semibold text-gray-900 text-sm">1. Stalled Cart (15m Inactivity)</h3>
-          <p className="text-xs text-gray-500">Triggers A2A negotiation, 5% discount recovery offer, and AP2 Cart Mandate prompt.</p>
+          <div>
+            <span className="cymbal-stamp bg-[#111a30] text-[#38bdf8] border border-[#1e293b] text-[9px]">
+              LOOP 1 • CHECKOUT
+            </span>
+            <h3 className="font-bold text-white text-sm mt-1">1. Stalled Cart (15m Inactivity)</h3>
+          </div>
+          <p className="text-xs text-slate-400 font-mono leading-relaxed">
+            Triggers A2A negotiation, 5% discount recovery offer, and AP2 Cart Mandate prompt.
+          </p>
         </button>
 
         <button
           onClick={triggerStockReplenish}
-          className="p-5 border rounded-xl bg-white hover:border-purple-500 hover:shadow-md transition text-left space-y-2 group"
+          className="cymbal-box-lg p-5 text-left space-y-3 hover:border-purple-500 transition-all group"
         >
           <div className="flex items-center justify-between">
-            <PackageCheck className="w-6 h-6 text-purple-600" />
-            <Play className="w-4 h-4 text-gray-400 group-hover:text-purple-600" />
+            <div className="w-10 h-10 rounded-t-lg rounded-br-lg rounded-bl-none bg-[#111a30] border border-purple-600 flex items-center justify-center text-purple-400">
+              <PackageCheck className="w-5 h-5" />
+            </div>
+            <Play className="w-4 h-4 text-slate-500 group-hover:text-purple-400 transition-colors" />
           </div>
-          <h3 className="font-semibold text-gray-900 text-sm">2. OOS Stock Arrival</h3>
-          <p className="text-xs text-gray-500">Triggers deterministic intent match, merchant JWT signing, and AP2 `checkout_hash` settlement.</p>
+          <div>
+            <span className="cymbal-stamp bg-[#111a30] text-purple-400 border border-[#1e293b] text-[9px]">
+              LOOP 2 • INVENTORY
+            </span>
+            <h3 className="font-bold text-white text-sm mt-1">2. OOS Stock Arrival</h3>
+          </div>
+          <p className="text-xs text-slate-400 font-mono leading-relaxed">
+            Triggers deterministic intent match, merchant JWT signing, and AP2 `checkout_hash` settlement.
+          </p>
         </button>
 
         <button
           onClick={triggerSurveyDetractor}
-          className="p-5 border rounded-xl bg-white hover:border-red-500 hover:shadow-md transition text-left space-y-2 group"
+          className="cymbal-box-lg p-5 text-left space-y-3 hover:border-[#881337] transition-all group"
         >
           <div className="flex items-center justify-between">
-            <AlertTriangle className="w-6 h-6 text-red-600" />
-            <Play className="w-4 h-4 text-gray-400 group-hover:text-red-600" />
+            <div className="w-10 h-10 rounded-t-lg rounded-br-lg rounded-bl-none bg-[#111a30] border border-[#881337] flex items-center justify-center text-[#f43f5e]">
+              <AlertTriangle className="w-5 h-5" />
+            </div>
+            <Play className="w-4 h-4 text-slate-500 group-hover:text-[#f43f5e] transition-colors" />
           </div>
-          <h3 className="font-semibold text-gray-900 text-sm">3. Detractor Survey (2/10)</h3>
-          <p className="text-xs text-gray-500">Sends neutral review link & posts in-place actionable escalation card to Google Chat.</p>
+          <div>
+            <span className="cymbal-stamp bg-[#111a30] text-[#f43f5e] border border-[#1e293b] text-[9px]">
+              LOOP 3 • OPERATIONS
+            </span>
+            <h3 className="font-bold text-white text-sm mt-1">3. Detractor Survey (2/10)</h3>
+          </div>
+          <p className="text-xs text-slate-400 font-mono leading-relaxed">
+            Sends neutral review link & posts in-place actionable escalation card to Google Chat.
+          </p>
         </button>
       </div>
 
       {statusMessage && (
-        <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl space-y-1">
-          <div className="flex items-center gap-2 text-blue-900 text-sm font-semibold">
-            <CheckCircle2 className="w-4 h-4 text-blue-600" /> Event Dispatched & Protocol Handled
+        <div className="cymbal-box-lg p-5 space-y-2 border-[#0284c7] bg-[#0c162d]">
+          <div className="flex items-center gap-2 text-[#38bdf8] text-xs font-bold font-mono">
+            <CheckCircle2 className="w-4 h-4 text-[#10b981]" /> [EVENT_DISPATCHED_AND_HANDLED]
           </div>
-          <p className="text-xs text-blue-800 font-mono">{statusMessage}</p>
+          <p className="text-xs font-mono text-slate-200 leading-relaxed">{statusMessage}</p>
         </div>
       )}
     </div>
