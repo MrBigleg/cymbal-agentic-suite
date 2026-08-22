@@ -1,1 +1,116 @@
 @import "tailwindcss";
+
+:root {
+  --bg-canvas: #060913;
+  --bg-surface: #0c1222;
+  --bg-surface-elevated: #111a30;
+  --bg-surface-accent: #172342;
+  --border-wire: #1e293b;
+  --border-wire-focus: #38bdf8;
+  --border-wire-accent: #0284c7;
+  --cyan-glow: #38bdf8;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --shadow-hard: 4px 4px 0px #020617;
+  --shadow-hard-sm: 2px 2px 0px #020617;
+  --shadow-hard-btn: 3px 3px 0px #082f49;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Master Asymmetric Corner Classes */
+.cymbal-box-lg {
+  border-radius: 20px 20px 20px 0px;
+  border: 1.5px solid #1e293b;
+  background-color: #0c1222;
+  box-shadow: 4px 4px 0px #020617;
+}
+
+.cymbal-box-md {
+  border-radius: 12px 12px 12px 0px;
+  border: 1px solid #1e293b;
+  background-color: #111a30;
+  box-shadow: 2px 2px 0px #020617;
+}
+
+.cymbal-btn-primary {
+  border-radius: 10px 10px 10px 0px;
+  border: 1.5px solid #0284c7;
+  background-color: #0284c7;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 3px 3px 0px #082f49;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.cymbal-btn-primary:hover {
+  background-color: #0369a1;
+  border-color: #38bdf8;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #082f49;
+}
+.cymbal-btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #082f49;
+}
+
+.cymbal-btn-secondary {
+  border-radius: 10px 10px 10px 0px;
+  border: 1.5px solid #1e293b;
+  background-color: #080d1a;
+  color: #cbd5e1;
+  font-weight: 600;
+  box-shadow: 2px 2px 0px #020617;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.cymbal-btn-secondary:hover {
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
+.cymbal-tag {
+  border-radius: 6px 6px 6px 0px;
+  border: 1px solid #1e293b;
+  background-color: #080d1a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+}
+
+.cymbal-stamp {
+  border-radius: 4px 4px 4px 0px;
+  background-color: #f59e0b;
+  color: #020617;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+  display: inline-flex;
+  align-items: center;
+}
+
+.cymbal-plate {
+  background-color: #f59e0b;
+  color: #020617;
+  font-family: ui-monospace, monospace;
+  font-weight: 900;
+  border: 2px solid #000000;
+  border-radius: 8px 8px 8px 0px;
+  box-shadow: 3px 3px 0px #020617;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
