@@ -9,7 +9,7 @@
     "test": "pnpm --recursive run test",
     "test:policy": "pnpm --filter @cymbal/deterministic-policy test",
     "test:protocol": "pnpm --filter @cymbal/commerce-protocol test",
-    "test:agent": "cd services/long-horizon-agent && pytest"
+    "test:agent": "cd services/long-horizon-agent && uv run pytest tests/unit"
   },
   "workspaces": [
     "apps/*",

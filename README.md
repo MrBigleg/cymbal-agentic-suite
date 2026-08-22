@@ -96,8 +96,9 @@ docker compose up --build
 
 ---
 
-## 🧪 Running Automated Tests
+## 🧪 Running Automated Tests & Verification Harness
 
+### 1. Fast Unit & Protocol Tests
 ```bash
 # Run deterministic commerce policy & AP2 verifier test suite
 pnpm --filter @cymbal/deterministic-policy test
@@ -105,14 +106,28 @@ pnpm --filter @cymbal/deterministic-policy test
 # Run A2A protocol schema tests
 pnpm --filter @cymbal/commerce-protocol test
 
-# Run Long Horizon agent sub-agent tests (Python)
-cd services/long-horizon-agent && pytest
+# Run Storefront app tests
+pnpm --filter @cymbal/storefront test
+
+# Run Long Horizon agent guardrail tests (Python)
+cd services/long-horizon-agent && uv run pytest tests/unit/test_exfil_guard.py tests/unit/test_guardrails.py
+```
+
+### 2. Automated Programmatic Smoke Test Harness
+```bash
+# Launch server, test /healthz, core endpoints, malformed error handling & graceful shutdown
+python scripts/smoke_test.py --target agent --port 8080
+
+# Windows PowerShell 1-Click execution:
+.\scripts\smoke_test.ps1 -Target agent -Port 8080
 ```
 
 ---
 
 ## 📜 Documentation Directory
 
+- 🧪 [**Local Testing & Verification Guide (Cloud Run Parity)**](docs/LOCAL_TESTING_AND_VERIFICATION.md)
+- 🛡️ [**Security Evaluation & Hardening Architecture**](docs/SECURITY_EVALUATION_AND_HARDENING.md)
 - 📖 [**Agent Architecture Deep-Dive**](docs/AGENT_ARCHITECTURE.md)
 - 🔒 [**AP2 v0.2 & A2A Protocol Specifications**](docs/PROTOCOL_SPEC.md)
 - 💬 [**Google Chat In-Place Card Integration**](docs/GOOGLE_CHAT_GUIDE.md)
