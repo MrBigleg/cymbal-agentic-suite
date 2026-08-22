@@ -45,10 +45,10 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <>
       <div
-        className={`bg-white rounded-xl shadow-xs border flex flex-col p-5 overflow-hidden transition-all duration-200 hover:shadow-md ${
+        className={`cymbal-box-lg flex flex-col p-5 overflow-hidden transition-all duration-200 hover:border-[#38bdf8] ${
           isOutOfStock
-            ? 'border-2 border-rose-100'
-            : 'border-slate-200 hover:border-slate-300'
+            ? 'border-[#881337]'
+            : 'border-[#1e293b]'
         }`}
       >
         {/* Top Header: Badge & Price */}
@@ -60,39 +60,39 @@ export function ProductCard({ product }: ProductCardProps) {
             size="sm"
           />
           <div className="text-right">
-            <span className="text-lg font-bold text-slate-900 leading-none">
+            <span className="font-mono text-xl font-black text-[#38bdf8] leading-none block">
               £{product.price.toFixed(2)}
             </span>
-            <div className="text-[9px] uppercase font-bold text-slate-400">
+            <div className="font-mono text-[9px] uppercase font-bold text-slate-500">
               inc. VAT & fitting
             </div>
           </div>
         </div>
 
-        {/* Tyre Image / Visual Container with Style Toggle */}
+        {/* Tyre Image / Visual Podium Container with Style Toggle */}
         <div className="relative mb-4">
           <Link
             href={`/product/${product.id}`}
-            className="h-44 sm:h-48 bg-slate-50/80 rounded-xl flex items-center justify-center relative overflow-hidden group/img border border-slate-100"
+            className="h-44 sm:h-48 bg-[#111a30] rounded-t-lg rounded-br-lg rounded-bl-none flex items-center justify-center relative overflow-hidden group/img border border-[#1e293b] border-b-2 border-b-[#0284c7]"
           >
             <Image
               src={currentImage}
               alt={product.name}
               width={260}
               height={260}
-              className="object-contain max-h-40 sm:max-h-44 group-hover/img:scale-105 transition-transform duration-300 drop-shadow-md"
+              className="object-contain max-h-40 sm:max-h-44 group-hover/img:scale-105 transition-transform duration-300 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
               referrerPolicy="no-referrer"
             />
             {product.vehicleType === 'EV / Hybrid' && (
-              <span className="absolute top-2 left-2 text-[9px] font-bold px-1.5 py-0.5 bg-emerald-600 text-white rounded shadow-xs flex items-center gap-0.5">
-                <Sparkles className="w-2.5 h-2.5" /> EV
+              <span className="absolute top-2 left-2 cymbal-tag text-emerald-400 border-emerald-800 bg-emerald-950/80 font-mono text-[9px] font-bold">
+                <Sparkles className="w-2.5 h-2.5" /> EV READY
               </span>
             )}
           </Link>
 
           {/* Quick toggle between Tyre only and Fitted Wheel Package */}
           {product.wheelPackageImage && (
-            <div className="absolute bottom-2 right-2 flex bg-white/90 backdrop-blur-xs border border-slate-200 rounded-lg p-0.5 shadow-xs text-[10px] font-semibold">
+            <div className="absolute bottom-2 right-2 flex bg-[#080d1a] border border-[#1e293b] rounded-t-sm rounded-br-sm rounded-bl-none p-0.5 text-[10px] font-mono font-semibold">
               <button
                 type="button"
                 onClick={(e) => {
@@ -100,10 +100,10 @@ export function ProductCard({ product }: ProductCardProps) {
                   e.stopPropagation();
                   setViewPackage(false);
                 }}
-                className={`px-2 py-0.5 rounded ${
+                className={`px-2 py-0.5 rounded-t-sm rounded-br-sm rounded-bl-none ${
                   !viewPackage
-                    ? 'bg-slate-900 text-white shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-[#111a30] text-[#38bdf8] border border-[#0284c7]'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Tyre
@@ -115,10 +115,10 @@ export function ProductCard({ product }: ProductCardProps) {
                   e.stopPropagation();
                   setViewPackage(true);
                 }}
-                className={`px-2 py-0.5 rounded ${
+                className={`px-2 py-0.5 rounded-t-sm rounded-br-sm rounded-bl-none ${
                   viewPackage
-                    ? 'bg-blue-600 text-white shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-[#0284c7] text-white'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Wheel
@@ -129,29 +129,34 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Tyre Brand & Name */}
         <div className="mb-1">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-            {product.brand} • {product.season}
-          </span>
+          <div className="flex items-center gap-1.5 mb-0.5">
+            <span className="cymbal-stamp bg-[#111a30] text-[#38bdf8] border border-[#1e293b] text-[9px]">
+              {product.brand}
+            </span>
+            <span className="font-mono text-[10px] uppercase font-bold text-slate-500">
+              {product.season}
+            </span>
+          </div>
           <Link
             href={`/product/${product.id}`}
-            className="font-bold text-slate-900 hover:text-blue-600 transition-colors leading-tight text-base line-clamp-1"
+            className="font-bold text-white hover:text-[#38bdf8] transition-colors leading-tight text-base line-clamp-1"
           >
             {product.name}
           </Link>
         </div>
 
         {/* Short Description */}
-        <p className="text-xs text-slate-500 mb-3 flex-1 line-clamp-2">
+        <p className="text-xs text-slate-400 mb-3 flex-1 line-clamp-2 leading-relaxed">
           {product.shortDescription}
         </p>
 
         {/* Spec Grid */}
-        <div className="grid grid-cols-2 gap-2 text-[10px] font-bold text-slate-500 uppercase mb-3">
-          <div className="bg-slate-50 p-1.5 rounded text-center truncate">
+        <div className="grid grid-cols-2 gap-2 text-[10px] font-mono font-bold text-slate-400 uppercase mb-3">
+          <div className="bg-[#111a30] border border-[#1e293b] p-1.5 rounded-t-sm rounded-br-sm rounded-bl-none text-center truncate">
             Size: {product.tyreSize}
           </div>
-          <div className="bg-slate-50 p-1.5 rounded text-center truncate">
-            {isOutOfStock ? `Depot: ${selectedStore.city}` : 'Fit: 45 min'}
+          <div className="bg-[#111a30] border border-[#1e293b] p-1.5 rounded-t-sm rounded-br-sm rounded-bl-none text-center truncate text-emerald-400">
+            {isOutOfStock ? `Depot: ${selectedStore.city}` : 'Bay Fit: 45 min'}
           </div>
         </div>
 
@@ -170,7 +175,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <button
             type="button"
             onClick={() => setIsIntentModalOpen(true)}
-            className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-bold text-sm hover:bg-blue-700 active:scale-98 transition-colors flex items-center justify-center space-x-2 shadow-xs"
+            className="cymbal-btn-primary w-full py-2.5 text-xs flex items-center justify-center space-x-2"
           >
             <Clock className="w-4 h-4 text-white" />
             <span>Buy when back in stock</span>
@@ -180,10 +185,10 @@ export function ProductCard({ product }: ProductCardProps) {
             type="button"
             onClick={handleQuickAdd}
             disabled={isAdding}
-            className="w-full bg-slate-900 text-white py-2.5 rounded-lg font-bold text-sm hover:bg-slate-800 active:scale-98 transition-colors flex items-center justify-center gap-2 shadow-xs disabled:opacity-75"
+            className="cymbal-btn-primary w-full py-2.5 text-xs flex items-center justify-center gap-2 disabled:opacity-75"
           >
             <ShoppingCart className="w-4 h-4" />
-            <span>{isAdding ? 'Adding...' : 'Add to Basket'}</span>
+            <span>{isAdding ? 'Adding...' : '⚡ Instant Fitting Booking'}</span>
           </button>
         )}
       </div>
@@ -199,4 +204,3 @@ export function ProductCard({ product }: ProductCardProps) {
     </>
   );
 }
-
