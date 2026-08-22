@@ -281,6 +281,8 @@ def current_user_id(request: Request) -> str:
 _UNAUTHENTICATED_PATHS: frozenset[str] = frozenset(
     {
         "/",
+        "/healthz",
+        "/ready",
         "/.well-known/agent-card.json",
     }
 )

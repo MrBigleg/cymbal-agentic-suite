@@ -16,6 +16,9 @@ FROM python:3.12-slim
 
 RUN pip install --no-cache-dir uv==0.8.13
 
+# Create non-root group and user
+RUN groupadd -r appuser && useradd -r -g appuser -d /code -s /sbin/nologin appuser
+
 WORKDIR /code
 
 COPY ./pyproject.toml ./README.md ./uv.lock* ./
@@ -23,6 +26,11 @@ COPY ./pyproject.toml ./README.md ./uv.lock* ./
 COPY ./horizon ./horizon
 
 RUN uv sync --frozen
+
+# Ensure appuser owns the workdir
+RUN chown -R appuser:appuser /code
+
+USER appuser
 
 ARG COMMIT_SHA=""
 ENV COMMIT_SHA=${COMMIT_SHA}
@@ -33,3 +41,4 @@ ENV AGENT_VERSION=${AGENT_VERSION}
 EXPOSE 8080
 
 CMD ["uv", "run", "uvicorn", "horizon.fast_api_app:app", "--host", "0.0.0.0", "--port", "8080", "--timeout-graceful-shutdown", "4"]
+

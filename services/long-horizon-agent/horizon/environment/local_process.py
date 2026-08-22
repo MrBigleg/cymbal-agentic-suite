@@ -26,15 +26,23 @@ from __future__ import annotations
 
 import asyncio
 import errno
-import fcntl
 import os
-import pty
 import signal
 import subprocess
 import threading
 import time
 import uuid
 from pathlib import Path
+
+try:
+    import fcntl
+except ImportError:
+    fcntl = None  # type: ignore
+
+try:
+    import pty
+except ImportError:
+    pty = None  # type: ignore
 
 DEFAULT_BUFFER_BYTES = 200 * 1024  # 200 KB rolling cap per session
 
@@ -63,6 +71,27 @@ class LocalProcessHandle:
         self._exit_event = threading.Event()
         self._last_output_at = self.started_at
 
+        if pty is None or fcntl is None:
+            # Fallback for platforms without native PTY (e.g. Windows unit test runner)
+            self._master_fd = -1
+            self._proc = subprocess.Popen(
+                command,
+                shell=True,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                cwd=cwd,
+                env=env,
+            )
+            self.pid = self._proc.pid
+            self._reader = threading.Thread(
+                target=self._pipe_reader_loop,
+                name=f"lha-proc-reader-{self.session_id}",
+                daemon=True,
+            )
+            self._reader.start()
+            return
+
         self._master_fd, slave_fd = pty.openpty()
         try:
             self._proc = subprocess.Popen(
@@ -89,6 +118,28 @@ class LocalProcessHandle:
             daemon=True,
         )
         self._reader.start()
+
+    def _pipe_reader_loop(self) -> None:
+        try:
+            while True:
+                chunk = self._proc.stdout.read(4096) if self._proc.stdout else b""
+                if not chunk:
+                    break
+                with self._lock:
+                    self._buffer.extend(chunk)
+                    self._total_bytes += len(chunk)
+                    self._last_output_at = time.time()
+                    overflow = len(self._buffer) - self._buffer_bytes
+                    if overflow > 0:
+                        del self._buffer[:overflow]
+        finally:
+            try:
+                self._proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+            self._exit_code = self._proc.returncode
+            self.finished_at = time.time()
+            self._exit_event.set()
 
     def _reader_loop(self) -> None:
         try:
@@ -170,10 +221,21 @@ class LocalProcessHandle:
     async def write(self, data: bytes) -> None:
         if self._exit_event.is_set():
             raise RuntimeError(f"process {self.session_id} has already exited")
+        if self._master_fd == -1:
+            def _write_pipe():
+                if self._proc.stdin:
+                    self._proc.stdin.write(data)
+                    self._proc.stdin.flush()
+            await asyncio.to_thread(_write_pipe)
+            return
         await asyncio.to_thread(os.write, self._master_fd, data)
 
     async def kill(self) -> None:
         if self._exit_event.is_set():
+            return
+        if not hasattr(os, "killpg"):
+            self._proc.kill()
+            await asyncio.to_thread(self._exit_event.wait, 1.0)
             return
         try:
             pgid = os.getpgid(self.pid)
@@ -196,3 +258,4 @@ class LocalProcessHandle:
     async def wait(self, timeout: float | None = None) -> int | None:
         await asyncio.to_thread(self._exit_event.wait, timeout)
         return self._exit_code
+

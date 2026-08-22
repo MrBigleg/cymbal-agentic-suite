@@ -21,6 +21,7 @@ adapt the sample by editing that + these routes."""
 import functools
 import logging
 import os
+import time
 from typing import TYPE_CHECKING
 
 from a2a.server.tasks import DatabaseTaskStore, InMemoryTaskStore, TaskStore
@@ -404,6 +405,12 @@ def _build_app() -> FastAPI:
     app.include_router(dream_review_endpoint.router)
     app.include_router(snapshot_endpoint.router)
     app.include_router(routine_tick_endpoint.router)
+
+    @app.get("/healthz")
+    @app.get("/ready")
+    async def healthcheck():
+        return {"status": "ok", "service": "long-horizon-agent", "timestamp": time.time()}
+
     return app
 
 
