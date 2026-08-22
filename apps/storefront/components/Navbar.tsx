@@ -12,6 +12,7 @@ import {
   ChevronDown,
   Search,
   Sparkles,
+  MapPin,
 } from 'lucide-react';
 
 export function Navbar() {
@@ -33,32 +34,35 @@ export function Navbar() {
 
   return (
     <>
-      {/* Sleek Primary Navbar */}
-      <nav className="h-16 bg-slate-900 text-white flex items-center justify-between px-4 sm:px-8 shrink-0 z-40 sticky top-0">
-        <div className="flex items-center space-x-4 sm:space-x-8">
+      {/* Wiry Neo-Brutalist Primary Navbar */}
+      <nav className="h-16 bg-[#0c1222] border-b border-[#1e293b] text-white flex items-center justify-between px-4 sm:px-8 shrink-0 z-40 sticky top-0 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center space-x-4 sm:space-x-6">
           {/* Brand */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold italic text-white text-base shadow-sm">
+          <Link href="/" className="flex items-center space-x-2.5 group">
+            <div className="w-8 h-8 rounded-t-lg rounded-br-lg rounded-bl-none bg-[#0284c7] border border-[#38bdf8] flex items-center justify-center font-black italic text-white text-base shadow-[2px_2px_0px_#020617] group-hover:translate-y-[-1px] transition-transform">
               C
             </div>
-            <span className="text-xl font-bold tracking-tight text-white uppercase">
-              CYMBAL AUTO
+            <span className="text-lg font-black tracking-tight text-white uppercase flex items-center gap-1.5">
+              CYMBAL <span className="text-[#38bdf8]">TYRES</span>
             </span>
           </Link>
 
-          <div className="h-8 w-px bg-slate-700 hidden sm:block" />
+          <div className="h-6 w-[1.5px] bg-[#1e293b] hidden sm:block" />
 
-          {/* Selected Store Selector */}
+          {/* Selected Depot Selector Pill */}
           <div
             onClick={() => setIsStoreModalOpen(true)}
-            className="flex flex-col cursor-pointer group"
+            className="cymbal-box-md px-3 py-1.5 cursor-pointer group hover:border-[#38bdf8] transition-colors flex items-center gap-2"
           >
-            <span className="text-[10px] uppercase text-slate-400 font-bold tracking-wider">
-              Selected Store
-            </span>
-            <div className="flex items-center space-x-1 group-hover:text-blue-400 text-white transition-colors">
-              <span className="text-sm font-semibold">{selectedStore.name}</span>
-              <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-blue-400" />
+            <MapPin className="w-3.5 h-3.5 text-[#38bdf8]" />
+            <div className="flex flex-col">
+              <span className="text-[9px] uppercase text-slate-400 font-bold tracking-wider leading-none">
+                Active Depot
+              </span>
+              <div className="flex items-center space-x-1 text-white group-hover:text-[#38bdf8] transition-colors">
+                <span className="text-xs font-bold leading-tight">{selectedStore.name}</span>
+                <ChevronDown className="w-3 h-3 text-slate-400 group-hover:text-[#38bdf8]" />
+              </div>
             </div>
           </div>
         </div>
@@ -70,23 +74,23 @@ export function Navbar() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tyres by size or brand..."
-              className="w-full bg-slate-800 border-none rounded-md py-2 px-4 pr-9 text-sm text-white placeholder-slate-400 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              placeholder="Search tyres by size, brand, or spec (e.g. 225/45 R17)..."
+              className="w-full bg-[#111a30] border border-[#1e293b] rounded-t-lg rounded-br-lg rounded-bl-none py-1.5 px-3 pr-9 text-xs text-white placeholder-slate-400 focus:border-[#38bdf8] focus:shadow-[0_0_12px_rgba(56,189,248,0.2)] outline-none transition-all"
             />
             <button
               type="submit"
-              className="absolute right-3 top-2.5 text-slate-400 hover:text-white"
+              className="absolute right-2.5 top-2 text-slate-400 hover:text-[#38bdf8] transition-colors"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-3.5 h-3.5" />
             </button>
           </form>
         </div>
 
         {/* Right Navigation & Cart */}
-        <div className="flex items-center space-x-3 sm:space-x-5">
+        <div className="flex items-center space-x-3 sm:space-x-4">
           <button
             onClick={() => setIsAssistantOpen(true)}
-            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold shadow-sm transition-all active:scale-95"
+            className="cymbal-btn-primary px-3 py-1.5 text-xs flex items-center gap-1.5"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
             <span className="hidden sm:inline">AI Buying Assistant</span>
@@ -95,27 +99,27 @@ export function Navbar() {
 
           <Link
             href="/shop"
-            className="text-sm font-medium hover:text-blue-400 transition-colors hidden md:inline"
+            className="text-xs font-bold text-slate-300 hover:text-[#38bdf8] transition-colors hidden md:inline"
           >
             Book Fitting
           </Link>
 
           <Link
             href="/demo-controls"
-            className="hidden lg:inline-flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors"
+            className="cymbal-tag hidden lg:inline-flex items-center gap-1.5 text-[#f59e0b] border-amber-500/40 bg-amber-500/10 hover:border-amber-400 transition-colors"
           >
             <Sliders className="w-3 h-3 text-amber-400" />
-            <span>Demo Controls</span>
+            <span>DEMO_CONTROLS</span>
           </Link>
 
           {/* Cart Icon with badge */}
           <Link
             href="/cart"
-            className="relative cursor-pointer text-slate-200 hover:text-blue-400 transition-colors p-1"
+            className="relative cursor-pointer text-slate-200 hover:text-[#38bdf8] transition-colors p-1"
           >
-            <ShoppingCart className="w-6 h-6" />
+            <ShoppingCart className="w-5 h-5" />
             {cartItemCount > 0 && (
-              <span className="absolute -top-1.5 -right-2 bg-blue-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+              <span className="absolute -top-1.5 -right-2 bg-[#0284c7] text-white border border-[#38bdf8] font-mono text-[10px] font-black w-4 h-4 flex items-center justify-center rounded-t-sm rounded-br-sm rounded-bl-none shadow-[1px_1px_0px_#020617]">
                 {cartItemCount}
               </span>
             )}
@@ -123,61 +127,61 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Sleek Sub-Navbar Category Bar */}
-      <div className="h-12 bg-white border-b border-slate-200 flex items-center px-4 sm:px-8 space-x-6 text-sm shrink-0 overflow-x-auto scrollbar-none z-30">
+      {/* Wiry Sub-Navbar Category Bar */}
+      <div className="h-10 bg-[#080d1a] border-b border-[#1e293b] flex items-center px-4 sm:px-8 space-x-6 text-xs shrink-0 overflow-x-auto scrollbar-none z-30 font-medium">
         <Link
           href="/shop"
-          className={`h-full flex items-center font-medium whitespace-nowrap transition-colors ${
+          className={`h-full flex items-center whitespace-nowrap transition-colors border-b-2 ${
             pathname === '/shop'
-              ? 'font-bold text-blue-600 border-b-2 border-blue-600'
-              : 'text-slate-500 hover:text-slate-800'
+              ? 'font-bold text-[#38bdf8] border-[#38bdf8]'
+              : 'text-slate-400 hover:text-slate-200 border-transparent'
           }`}
         >
-          All Tyres
+          All Tyres & Sizes
         </Link>
         <Link
           href="/shop?season=Winter"
-          className="text-slate-500 hover:text-slate-800 whitespace-nowrap transition-colors"
+          className="text-slate-400 hover:text-slate-200 whitespace-nowrap transition-colors"
         >
           Winter Tyres
         </Link>
         <Link
           href="/shop?sort=popular"
-          className="text-slate-500 hover:text-slate-800 whitespace-nowrap transition-colors"
+          className="text-slate-400 hover:text-slate-200 whitespace-nowrap transition-colors"
         >
-          Performance
+          Performance Tyres
         </Link>
         <Link
           href="/shop?vehicleType=EV%20%2F%20Hybrid"
-          className="text-slate-500 hover:text-slate-800 whitespace-nowrap transition-colors"
+          className="text-slate-400 hover:text-slate-200 whitespace-nowrap transition-colors"
         >
           EV Ready
         </Link>
         <Link
           href="/shop?brand=Continental"
-          className="text-slate-500 hover:text-slate-800 whitespace-nowrap transition-colors"
+          className="text-slate-400 hover:text-slate-200 whitespace-nowrap transition-colors"
         >
-          Commercial
+          Continental Range
         </Link>
 
         <div className="flex-1 min-w-4" />
 
-        <div className="flex items-center space-x-2 text-xs shrink-0">
-          <span className="text-slate-400 hidden sm:inline">Filter by:</span>
+        <div className="flex items-center space-x-2 shrink-0">
+          <span className="text-slate-500 font-mono text-[10px] uppercase hidden sm:inline">Quick Size:</span>
           <select
             onChange={(e) => {
               if (e.target.value) router.push(e.target.value);
             }}
-            className="border-none bg-slate-100 rounded px-2 py-1 font-medium text-slate-800 outline-none text-xs"
+            className="bg-[#111a30] border border-[#1e293b] rounded-t-sm rounded-br-sm rounded-bl-none px-2 py-0.5 font-mono text-[11px] text-slate-300 outline-none hover:border-[#38bdf8] cursor-pointer"
             defaultValue=""
           >
             <option value="" disabled>
-              Select Quick Size
+              Select Dimension
             </option>
-            <option value="/shop?q=225%2F45%20R17">Size: 225/45 R17</option>
-            <option value="/shop?q=205%2F55%20R16">Size: 205/55 R16</option>
-            <option value="/shop?q=245%2F40%20R18">Size: 245/40 R18</option>
-            <option value="/shop?q=255%2F35%20R19">Size: 255/35 R19</option>
+            <option value="/shop?q=225%2F45%20R17">225/45 R17</option>
+            <option value="/shop?q=205%2F55%20R16">205/55 R16</option>
+            <option value="/shop?q=245%2F40%20R18">245/40 R18</option>
+            <option value="/shop?q=255%2F35%20R19">255/35 R19</option>
           </select>
         </div>
       </div>
@@ -196,4 +200,3 @@ export function Navbar() {
     </>
   );
 }
-
