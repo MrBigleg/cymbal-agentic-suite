@@ -44,7 +44,6 @@ export function IntentModal({ isOpen, onClose, product }: IntentModalProps) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [createdIntent, setCreatedIntent] = useState<PurchaseIntent | null>(null);
 
-  // Update max price when quantity changes if it was on default
   const handleQuantityChange = (newQty: number) => {
     setQuantity(newQty);
     setMaxTotalPrice(Number((product.price * newQty * 1.05).toFixed(2)));
@@ -94,29 +93,32 @@ export function IntentModal({ isOpen, onClose, product }: IntentModalProps) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.96, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 10 }}
-          className="bg-white dark:bg-slate-900 rounded-2xl max-w-xl w-full shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden my-8"
+          className="cymbal-box-lg max-w-xl w-full bg-[#0c1222] border-[#0284c7] shadow-[8px_8px_0px_#000000] overflow-hidden my-8"
         >
           {/* Header */}
-          <div className="p-5 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-900 text-white">
+          <div className="p-5 sm:p-6 border-b border-[#1e293b] flex items-center justify-between bg-[#080d1a] text-white">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+              <div className="w-10 h-10 rounded-t-lg rounded-br-lg rounded-bl-none bg-[#111a30] border border-[#0284c7] flex items-center justify-center text-[#38bdf8]">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-lg leading-tight">Buy When Back in Stock</h3>
-                <p className="text-xs text-slate-300">
-                  Agentic conditional intent & stock trigger simulation
-                </p>
+                <div className="flex items-center gap-2">
+                  <span className="cymbal-stamp bg-amber-400 text-[#020617]">AP2 v0.2</span>
+                  <span className="font-mono text-[10px] text-slate-400 uppercase">Pre-Authorization</span>
+                </div>
+                <h3 className="font-black text-lg leading-tight uppercase mt-0.5">
+                  Buy When Back in Stock
+                </h3>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-t-sm rounded-br-sm rounded-bl-none text-slate-400 hover:text-white hover:bg-[#111a30] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -125,20 +127,20 @@ export function IntentModal({ isOpen, onClose, product }: IntentModalProps) {
           {!createdIntent ? (
             <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-5">
               {/* Product summary pill */}
-              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 flex items-center justify-between gap-3">
+              <div className="cymbal-box-md p-3.5 flex items-center justify-between gap-3">
                 <div>
-                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                    Product Currently Unavailable
+                  <div className="font-mono text-[10px] font-semibold text-slate-400 uppercase">
+                    Requested Item (OOS)
                   </div>
-                  <div className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
+                  <div className="font-bold text-white text-sm sm:text-base">
                     {product.name}
                   </div>
-                  <div className="text-xs text-slate-600 dark:text-slate-300 font-mono">
+                  <div className="text-xs text-[#38bdf8] font-mono">
                     {product.tyreSize} • £{product.price.toFixed(2)} inc. VAT
                   </div>
                 </div>
-                <span className="px-2.5 py-1 text-xs font-semibold rounded-full bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
-                  Out of Stock
+                <span className="cymbal-tag bg-[#2a080c] border-[#881337] text-[#f43f5e] font-mono text-[10px] font-bold">
+                  OUT OF STOCK
                 </span>
               </div>
 
@@ -146,13 +148,13 @@ export function IntentModal({ isOpen, onClose, product }: IntentModalProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Store selection */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                    Preferred Fitting Centre
+                  <label className="block text-[10px] font-mono font-bold uppercase text-slate-400 mb-1.5">
+                    Preferred Fitting Depot
                   </label>
                   <select
                     value={storeId}
                     onChange={(e) => setStoreId(e.target.value)}
-                    className="w-full text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full text-xs rounded-t-lg rounded-br-lg rounded-bl-none border border-[#1e293b] bg-[#111a30] text-white p-2.5 outline-none focus:border-[#38bdf8]"
                   >
                     {stores.map((s) => (
                       <option key={s.id} value={s.id}>
@@ -164,19 +166,19 @@ export function IntentModal({ isOpen, onClose, product }: IntentModalProps) {
 
                 {/* Quantity */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label className="block text-[10px] font-mono font-bold uppercase text-slate-400 mb-1.5">
                     Quantity Required
                   </label>
-                  <div className="flex rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden p-1">
+                  <div className="flex rounded-t-lg rounded-br-lg rounded-bl-none border border-[#1e293b] bg-[#111a30] p-1">
                     {[1, 2, 4].map((num) => (
                       <button
                         type="button"
                         key={num}
                         onClick={() => handleQuantityChange(num)}
-                        className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
+                        className={`flex-1 py-1.5 text-xs font-mono font-bold rounded-t-sm rounded-br-sm rounded-bl-none transition-colors ${
                           quantity === num
-                            ? 'bg-blue-600 text-white shadow-xs'
-                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+                            ? 'bg-[#0284c7] text-white shadow-[1px_1px_0px_#082f49]'
+                            : 'text-slate-400 hover:text-white'
                         }`}
                       >
                         {num} {num === 1 ? 'Tyre' : 'Tyres'}
@@ -187,12 +189,12 @@ export function IntentModal({ isOpen, onClose, product }: IntentModalProps) {
 
                 {/* Max Total Price */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
-                    <span>Max Acceptable Total (£)</span>
-                    <span className="text-[11px] text-slate-500 font-normal">Cap for auto-order</span>
+                  <label className="block text-[10px] font-mono font-bold uppercase text-slate-400 mb-1.5 flex items-center justify-between">
+                    <span>Max Price Cap (£)</span>
+                    <span className="text-[10px] text-slate-500 font-normal">AP2 Limit</span>
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-2.5 text-slate-400 font-semibold text-sm">
+                    <span className="absolute left-3 top-2 text-slate-400 font-mono text-xs">
                       £
                     </span>
                     <input
@@ -202,20 +204,20 @@ export function IntentModal({ isOpen, onClose, product }: IntentModalProps) {
                       value={maxTotalPrice}
                       onChange={(e) => setMaxTotalPrice(Number(e.target.value))}
                       required
-                      className="w-full text-sm pl-8 pr-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none font-semibold"
+                      className="w-full text-xs font-mono font-bold pl-7 pr-3 py-2 rounded-t-lg rounded-br-lg rounded-bl-none border border-[#1e293b] bg-[#111a30] text-[#38bdf8] outline-none focus:border-[#38bdf8]"
                     />
                   </div>
                 </div>
 
                 {/* Expiry period */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                    Intent Expiry Period
+                  <label className="block text-[10px] font-mono font-bold uppercase text-slate-400 mb-1.5">
+                    Intent Expiry
                   </label>
                   <select
                     value={expiryDays}
                     onChange={(e) => setExpiryDays(Number(e.target.value))}
-                    className="w-full text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full text-xs font-mono rounded-t-lg rounded-br-lg rounded-bl-none border border-[#1e293b] bg-[#111a30] text-white p-2.5 outline-none focus:border-[#38bdf8]"
                   >
                     <option value={7}>7 Days (Urgent)</option>
                     <option value={14}>14 Days (Standard)</option>
@@ -225,229 +227,101 @@ export function IntentModal({ isOpen, onClose, product }: IntentModalProps) {
                 </div>
               </div>
 
+              {/* Vehicle & Customer Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-[#1e293b]">
+                <div>
+                  <label className="block text-[10px] font-mono font-bold uppercase text-slate-400 mb-1">
+                    Vehicle Reg Plate
+                  </label>
+                  <input
+                    type="text"
+                    value={vehicleReg}
+                    onChange={(e) => setVehicleReg(e.target.value.toUpperCase())}
+                    className="w-full font-mono text-xs uppercase p-2 rounded-t-lg rounded-br-lg rounded-bl-none border border-[#1e293b] bg-[#111a30] text-white outline-none focus:border-[#38bdf8]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-mono font-bold uppercase text-slate-400 mb-1">
+                    Contact Name
+                  </label>
+                  <input
+                    type="text"
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    className="w-full text-xs p-2 rounded-t-lg rounded-br-lg rounded-bl-none border border-[#1e293b] bg-[#111a30] text-white outline-none focus:border-[#38bdf8]"
+                  />
+                </div>
+              </div>
+
               {/* Substitution toggle */}
-              <div className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 flex items-start gap-3">
+              <div className="p-3.5 cymbal-box-md flex items-start gap-3">
                 <input
                   type="checkbox"
                   id="substitution"
                   checked={allowSubstitution}
                   onChange={(e) => setAllowSubstitution(e.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                  className="mt-0.5 h-4 w-4 rounded border-slate-700 text-[#0284c7] focus:ring-[#38bdf8]"
                 />
                 <label htmlFor="substitution" className="text-xs cursor-pointer">
-                  <span className="font-bold text-slate-900 dark:text-white block">
+                  <span className="font-bold text-white block">
                     Allow equivalent premium substitute
                   </span>
-                  <span className="text-slate-500 dark:text-slate-400">
-                    If this specific model is delayed, match an equivalent OE premium tyre matching size {product.tyreSize} within price cap.
+                  <span className="text-slate-400 text-[11px]">
+                    Accept same-tier tyres (e.g. Goodyear Eagle F1 for Michelin PS5) within the price cap.
                   </span>
                 </label>
-              </div>
-
-              {/* Approval preference selection (AP2 simulation) */}
-              <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  Stock Replenishment Action (Approval Mode)
-                </label>
-                <div className="space-y-2">
-                  <label
-                    className={`flex items-start gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${
-                      approvalMode === 'automatic'
-                        ? 'border-blue-600 bg-blue-50/60 dark:bg-blue-950/40 shadow-xs'
-                        : 'border-slate-200 dark:border-slate-800 hover:border-slate-300'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="approvalMode"
-                      value="automatic"
-                      checked={approvalMode === 'automatic'}
-                      onChange={() => setApprovalMode('automatic')}
-                      className="mt-1 text-blue-600 focus:ring-blue-500"
-                    />
-                    <div className="text-xs">
-                      <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                        Automatically purchase if all conditions are met
-                      </span>
-                      <span className="text-slate-500 dark:text-slate-400 block mt-0.5">
-                        Simulated AP2 pre-authorization. Instantly reserves stock & schedules bay appointment when replenished.
-                      </span>
-                    </div>
-                  </label>
-
-                  <label
-                    className={`flex items-start gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${
-                      approvalMode === 'human_present'
-                        ? 'border-blue-600 bg-blue-50/60 dark:bg-blue-950/40 shadow-xs'
-                        : 'border-slate-200 dark:border-slate-800 hover:border-slate-300'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="approvalMode"
-                      value="human_present"
-                      checked={approvalMode === 'human_present'}
-                      onChange={() => setApprovalMode('human_present')}
-                      className="mt-1 text-blue-600 focus:ring-blue-500"
-                    />
-                    <div className="text-xs">
-                      <span className="font-bold text-slate-900 dark:text-white">
-                        Ask me before purchasing
-                      </span>
-                      <span className="text-slate-500 dark:text-slate-400 block mt-0.5">
-                        Receive instant SMS/Email notification when stock arrives with a 2-hour priority lock to complete checkout.
-                      </span>
-                    </div>
-                  </label>
-                </div>
-              </div>
-
-              {/* Customer Contact Details */}
-              <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
-                <div className="text-xs font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 text-slate-400" />
-                  Customer Notification & Matching Contact
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Your Full Name"
-                      value={customerName}
-                      onChange={(e) => setCustomerName(e.target.value)}
-                      required
-                      className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Email Address"
-                      value={customerEmail}
-                      onChange={(e) => setCustomerEmail(e.target.value)}
-                      required
-                      className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="tel"
-                      placeholder="Mobile Phone"
-                      value={customerPhone}
-                      onChange={(e) => setCustomerPhone(e.target.value)}
-                      className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Vehicle Reg (e.g. BK72 XDA)"
-                      value={vehicleReg}
-                      onChange={(e) => setVehicleReg(e.target.value.toUpperCase())}
-                      className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono font-bold focus:ring-2 focus:ring-blue-500 outline-none uppercase"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Protocol Note */}
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 p-2.5 rounded-lg flex items-start gap-2">
-                <Info className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
-                <span>
-                  <strong>AP2 Protocol Simulation:</strong> Payment authority is simulated for competition demonstration. In integration, this binds to UCP Agent session token.
-                </span>
-              </div>
-
-              {/* Submit CTA */}
-              <div className="flex items-center justify-end gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="px-4 py-2.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-5 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-98 rounded-xl shadow-md transition-all flex items-center gap-2"
-                >
-                  {isSubmitting ? (
-                    'Saving Intent...'
-                  ) : (
-                    <>
-                      <span>Register Purchase Intent</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
-          ) : (
-            /* Confirmation Screen */
-            <div className="p-6 text-center space-y-5">
-              <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center border-2 border-emerald-300 dark:border-emerald-700">
-                <CheckCircle2 className="w-8 h-8" />
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                  Purchase Intent Confirmed
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
-                  Your out-of-stock conditional order has been registered into the Cymbal Auto agent queue.
-                </p>
-              </div>
-
-              {/* Structured Receipt Box */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-left font-mono text-xs space-y-2 max-w-md mx-auto">
-                <div className="flex justify-between border-b pb-1.5 border-slate-200 dark:border-slate-700">
-                  <span className="text-slate-500">Intent ID:</span>
-                  <span className="font-bold text-blue-600 dark:text-blue-400">{createdIntent.id}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Product:</span>
-                  <span className="text-slate-900 dark:text-white font-sans font-semibold">
-                    {createdIntent.productName} ({createdIntent.quantity}x)
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Target Store:</span>
-                  <span className="text-slate-900 dark:text-white font-sans">{createdIntent.storeName}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Max Price Cap:</span>
-                  <span className="font-bold text-emerald-600">£{createdIntent.maxTotalPrice.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Approval Mode:</span>
-                  <span className="font-bold uppercase text-slate-800 dark:text-slate-200">
-                    {createdIntent.approvalMode === 'automatic' ? 'Autonomous (AP2)' : 'Human Approval'}
-                  </span>
-                </div>
-                <div className="flex justify-between pt-1 border-t border-slate-200 dark:border-slate-700">
-                  <span className="text-slate-500">Status:</span>
-                  <span className="inline-flex items-center gap-1 font-sans text-[11px] px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 font-semibold">
-                    <Clock className="w-3 h-3" /> waiting_for_stock
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl text-xs text-blue-900 dark:text-blue-200 text-left flex items-start gap-2 max-w-md mx-auto">
-                <Sparkles className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-                <span>
-                  <strong>Simulation Tip:</strong> Open <strong>Demo Controls</strong> (`/demo-controls`) to trigger stock replenishment for <strong>{createdIntent.storeName}</strong> to watch this intent trigger in real time!
-                </span>
               </div>
 
               <div className="pt-2">
                 <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="cymbal-btn-primary w-full py-3 text-xs flex items-center justify-center gap-2"
+                >
+                  <Lock className="w-4 h-4" />
+                  <span>{isSubmitting ? 'Signing Pre-Auth Mandate...' : 'Authorize AP2 Purchase Intent'}</span>
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="p-6 space-y-5 text-center">
+              <div className="w-12 h-12 rounded-t-lg rounded-br-lg rounded-bl-none bg-[#022c22] border border-[#064e3b] text-[#10b981] mx-auto flex items-center justify-center">
+                <CheckCircle2 className="w-6 h-6" />
+              </div>
+
+              <div>
+                <h4 className="text-xl font-black text-white uppercase">Intent Registered Successfully</h4>
+                <p className="text-xs text-slate-400 mt-1">
+                  Mandate <strong className="font-mono text-[#38bdf8]">{createdIntent.id}</strong> has been signed & committed to the deterministic policy engine.
+                </p>
+              </div>
+
+              <div className="cymbal-box-md p-4 text-left font-mono text-xs space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Target Item:</span>
+                  <span className="text-white font-bold">{createdIntent.productName}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Depot:</span>
+                  <span className="text-slate-200">{createdIntent.storeName}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Price Cap:</span>
+                  <span className="text-[#38bdf8] font-bold">£{createdIntent.maxTotalPrice.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Status:</span>
+                  <span className="text-[#10b981] font-bold">[ACTIVE_MONITORING]</span>
+                </div>
+              </div>
+
+              <div className="pt-2 flex gap-3">
+                <button
                   type="button"
                   onClick={onClose}
-                  className="w-full sm:w-auto px-6 py-2.5 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600 rounded-xl transition-all"
+                  className="cymbal-btn-primary flex-1 py-2.5 text-xs"
                 >
-                  Close & Return to Catalog
+                  Done
                 </button>
               </div>
             </div>
