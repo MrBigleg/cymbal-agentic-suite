@@ -64,22 +64,18 @@
 
 ---
 
-## 📅 Session 4: Wiry Neo-Brutalist Theme Rollout & Custom Studio Assets
+## 📅 Session 4: Custom Studio Tyre Assets & Wheel Package Visualizer
 - **Date**: 2026-08-22
-- **Topic**: Frontend Visual Design Overhaul & Real Studio Tyre Assets
+- **Topic**: Real Studio Tyre Cutouts & Fitted Alloy Wheel Overlays
 
 ### 🎯 The What
-1. **Neo-Brutalist Design System**:
-   - Defined custom Tailwind utility classes (`cymbal-box`, `cymbal-btn-primary`, `cymbal-btn-secondary`, `cymbal-tag`, `cymbal-badge`).
-   - Implemented an asymmetric, technical dark aesthetic (`#0c1222` dark navy, `#1e293b` borders, `#38bdf8` electric blue accents, monospace metric pills).
-2. **Custom Tyre Assets & Fitted Wheel Packages**:
-   - Replaced generic Unsplash stock photos with high-resolution custom studio tyre cutouts (`ultra-sport-ev.png`, `all-season-pro.png`, `winter-grip-ice.png`, `eco-touring-plus.png`, `all-terrain-heavy.png`).
-   - Added interactive "Fitted Wheel & Tyre Package" toggle with realistic alloy wheel overlay visuals.
-3. **Restyled Components**:
-   - Upgraded `Navbar`, `Footer`, `ProductCard`, `StockStatusBadge`, `TyreBadge`, `Shop` catalog, and `ProductDetail` views.
+1. **Custom Studio Tyre Assets**:
+   - Replaced generic stock photos with high-resolution custom studio tyre cutouts (`ultra-sport-ev.png`, `all-season-pro.png`, `winter-grip-ice.png`, `eco-touring-plus.png`, `all-terrain-heavy.png`).
+2. **Fitted Alloy Wheel Visualizer**:
+   - Added interactive "Fitted Wheel & Tyre Package" toggle with realistic alloy wheel overlay visuals on the Product Detail Page.
 
 ### 💡 The Why
-- **Enterprise Credibility & Visual Polish**: Moving beyond generic ecommerce templates to a distinctive, engineering-grade automotive portal showcases high production quality and brand consistency for Cymbal Tyres.
+- **Real-World Fidelity**: Visual quality and authentic automotive assets immediately communicate domain authority and credibility for the Cymbal Tyres brand.
 
 ---
 
@@ -89,7 +85,7 @@
 
 ### 🎯 The What
 1. **Driver.js v1 Integration & Multi-Track Engine (`apps/storefront/lib/tour-config.ts`)**:
-   - Installed `driver.js` in `@cymbal/storefront`.
+   - Installed `driver.js` (^1.8.0) in `@cymbal/storefront`.
    - Designed and built 3 guided interactive tour tracks:
      - **Track 1: Judge Architecture Tour (6 Steps)**: Explains the full multi-loop agentic architecture across `/`, `/shop`, `/cart`, `/demo-controls`, and `/manager/incidents/inc_001` with protocol badges `[OKF PROTOCOL]`, `[GOOGLE ADK 2.5]`, `[AP2 v0.2]`, `[A2A + UCP]`, `[EVENT SIMULATOR]`, `[HITL + GBP]`.
      - **Track 2: Customer / Shopper Tour (4 Steps)**: Onboarding guide covering vehicle registration lookup, tyre dimension filtering, basket review, and fitting slot booking.
@@ -102,15 +98,40 @@
 3. **Tour Launcher & UI Components (`apps/storefront/components/TourLauncher.tsx`)**:
    - Floating pill in bottom right corner with animated glow (`⚡ Interactive Guide / Judge & Shopper Tours`).
    - Track selector modal with track summaries, step counts, and 1-click link copying.
-   - Header navigation item trigger for quick access.
-4. **Dark Neo-Brutalist Styling (`apps/storefront/app/globals.css`)**:
-   - Custom CSS overrides matching the Cymbal brand theme (`#0c1222` dark background, `#38bdf8` cyan borders, monospace protocol badges, solid shadows).
-5. **Testing & Verification**:
+4. **Testing & Verification**:
    - Authored unit test suite `apps/storefront/tests/unit/tour-config.test.ts` (9 unit tests).
-   - Verified 100% pass rate across all 13 unit tests and a zero-error Next.js production build (`pnpm --filter @cymbal/storefront build`).
 
 ### 💡 The Why
-- **Hackathon Evaluation Friction**: Judges have limited time to review complex multi-protocol architectures (ADK 2.5, AP2 v0.2, A2A, UCP, OKF). A guided, interactive tour with live actionable buttons allows any judge to comprehend and test the end-to-end loops in under 2 minutes.
-- **Cross-Route Parity**: The system spans customer-facing storefronts, demo simulators, and manager back-offices. A unified cross-route orchestrator bridges these separate views into one continuous story.
+- **Evaluation Velocity**: Evaluators and judges have limited time. An interactive multi-track tour with in-place action triggers allows anyone to experience and understand the complete multi-protocol architecture in under 2 minutes.
 
+---
 
+## 📅 Session 6: Master Design System (`design.md`) & Wiry Neo-Brutalist Slate Rollout
+- **Date**: 2026-08-22
+- **Topic**: Multi-Channel Design System & Comprehensive Frontend Overhaul
+
+### 🎯 The What
+1. **Master Design System Specification (`design.md`)**:
+   - Authored master multi-channel design documentation covering Core Philosophy, Design Tokens, Asymmetric Corner Geometry, Typography, UI Components, Google Chat Cards v2, AI Image Art Direction, and Competition Verification Matrices.
+2. **Global Token & Utility Setup (`apps/storefront/app/globals.css`)**:
+   - Implemented signature asymmetric geometry (`border-radius: [T] [T] [T] 0px` — top-left, top-right, bottom-right rounded; bottom-left sharp).
+   - Exported custom utility classes: `.cymbal-box-lg` (`20px 20px 20px 0px`), `.cymbal-box-md` (`12px 12px 12px 0px`), `.cymbal-btn-primary` (`10px 10px 10px 0px`), `.cymbal-tag`, `.cymbal-stamp` (`6px 6px 6px 0px`), and authentic British yellow reg plate `.cymbal-plate` (`8px 8px 8px 0px`).
+   - Defined obsidian canvas (`#060913`), dark slate flat surfaces (`#0c1222`, `#111a30`), wire borders (`#1e293b`, `#0284c7`), electric cyan accents (`#38bdf8`), and hard brutalist drop shadows (`4px 4px 0px #020617`).
+3. **Complete Surface Rollout Across 8 Modules**:
+   - **Header & Navbar** (`Navbar.tsx`): Flat dark slate container, asymmetric depot switcher, monospace cart counter.
+   - **Footer & Audit Bar** (`Footer.tsx`): Telemetry indicator, depot contact matrix, revision watermark.
+   - **Homepage & Search** (`page.tsx`, `TyreSearchWidget.tsx`): Obsidian hero, yellow reg plate box, wire dimension dropdowns.
+   - **Catalog & Product Details** (`shop/page.tsx`, `product/[id]/page.tsx`): Asymmetric filter sidebar, EU rating badges, bay fitting choice selector.
+   - **Modals & Overlays** (`StoreSelectorModal.tsx`, `IntentModal.tsx`, `BuyingAssistantModal.tsx`): High-contrast modal frames, pre-authorization telemetry chips, grounded AI insights.
+   - **Basket & Checkout** (`cart/page.tsx`, `checkout/page.tsx`): 4-stage UCP checkout stepper, monospace pricing breakdowns, AP2 agent wallet simulation.
+   - **Operations & Incidents** (`manager/page.tsx`, `manager/incidents/[id]/page.tsx`): Live regional telemetry grid, SHA-256 immutable audit ledger, Places Insights competitive benchmarks.
+   - **Demo Controls** (`demo-controls/page.tsx`): Asymmetric event trigger cards with real-time protocol feedback badges.
+4. **End-to-End Test & Build Verification**:
+   - Unit tests: `theme-tokens.test.ts`, `tour-config.test.ts`, `gchat-cards.test.ts` (13 tests passed).
+   - Deterministic policy tests: `ap2-verifier.test.ts`, `verifier-crypto.test.ts`, `commerce-policy.test.ts`, `e2e-agentic-loops.test.ts` (11 tests passed).
+   - Commerce protocol tests: `a2a-protocol.test.ts` (3 tests passed).
+   - Total TypeScript monorepo: 8 test files, 27 tests passed (100% PASS).
+   - Next.js production build: 15/15 static pages compiled with zero errors.
+
+### 💡 The Why
+- **Engineering-Grade Aesthetic Authority**: Moving away from generic SaaS templates to a disciplined, wiry neo-brutalist theme reinforces the mechanical precision, cryptographic auditability, and technical depth of the Cymbal Agentic Suite for hackathon judges and enterprise evaluators.

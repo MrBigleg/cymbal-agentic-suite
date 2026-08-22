@@ -126,6 +126,7 @@ python scripts/smoke_test.py --target agent --port 8080
 
 ## 📜 Documentation Directory
 
+- 🎨 [**Master Design System Specification (Wiry Neo-Brutalist)**](design.md)
 - 📜 [**Development Session History (What & Why Changelog)**](docs/SESSION_HISTORY.md)
 - 🧪 [**Local Testing & Verification Guide (Cloud Run Parity)**](docs/LOCAL_TESTING_AND_VERIFICATION.md)
 - 🛡️ [**Security Evaluation & Hardening Architecture**](docs/SECURITY_EVALUATION_AND_HARDENING.md)
