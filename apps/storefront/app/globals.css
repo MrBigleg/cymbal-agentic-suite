@@ -114,3 +114,49 @@ body {
   align-items: center;
   gap: 8px;
 }
+
+/* ==========================================================================
+   Driver.js Dark Neo-Brutalist Popover & Overlay Overrides
+   ========================================================================== */
+.driver-popover {
+  background-color: #0c1222 !important;
+  color: #f8fafc !important;
+  border: 2px solid #38bdf8 !important;
+  border-radius: 12px 12px 12px 0px !important;
+  box-shadow: 6px 6px 0px #020617, 0 0 25px rgba(56, 189, 248, 0.25) !important;
+  padding: 16px !important;
+  max-width: 380px !important;
+  z-index: 1000000000 !important;
+}
+
+.driver-popover-arrow {
+  display: none !important;
+}
+
+.driver-popover-title {
+  display: none !important;
+}
+
+.driver-popover-description {
+  color: #e2e8f0 !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0 !important;
+}
+
+.driver-popover-footer {
+  display: none !important; /* Managed via our custom TourContext template */
+}
+
+.driver-overlay {
+  background-color: rgba(2, 6, 23, 0.85) !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+.driver-highlighted-element {
+  outline: 2px solid #38bdf8 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4) !important;
+  border-radius: 4px !important;
+}
+

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Play, Sparkles, AlertTriangle, ShoppingCart, PackageCheck, CheckCircle2, Sliders } from "lucide-react";
 
 export default function DemoControlsPage() {
@@ -18,8 +18,19 @@ export default function DemoControlsPage() {
     setStatusMessage("⚠️ Dispatched `customer.survey.submitted` (Score: 2/10) -> Dispatched neutral Google Review link -> Posted interactive card to Manager's Google Chat with in-place action buttons.");
   };
 
+  useEffect(() => {
+    const handleTourAction = (e: Event) => {
+      const customEvent = e as CustomEvent<{ actionId: string }>;
+      if (customEvent.detail?.actionId === "TRIGGER_STOCK_REPLENISH") {
+        triggerStockReplenish();
+      }
+    };
+    window.addEventListener("cymbal-tour-action", handleTourAction);
+    return () => window.removeEventListener("cymbal-tour-action", handleTourAction);
+  }, []);
+
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <div data-tour="demo-controls-container" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       {/* Header */}
       <div className="cymbal-box-lg p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

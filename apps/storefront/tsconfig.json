@@ -20,7 +20,9 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@cymbal/commerce-protocol": ["../../packages/commerce-protocol/src/index.ts"],
+      "@cymbal/deterministic-policy": ["../../packages/deterministic-policy/src/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

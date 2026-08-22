@@ -81,18 +81,25 @@ export default function CheckoutPage() {
     setIsProcessing(true);
 
     try {
+      await mockCommerceService.updateCheckout(checkoutSession.checkoutId, {
+        customer: {
+          name,
+          email,
+          phone,
+          vehicleReg,
+        },
+        fittingSlot: {
+          date: selectedDate,
+          timeSlot: selectedTimeSlot,
+        },
+      });
+
       const order = await mockCommerceService.completeCheckout(checkoutSession.checkoutId, {
-        customerName: name,
-        customerEmail: email,
-        customerPhone: phone,
-        vehicleReg,
-        fittingDate: selectedDate,
-        fittingTimeSlot: selectedTimeSlot,
-        paymentMethod: paymentType === 'simulated_card' ? 'Visa •••• 4242' : 'AP2 Agent Wallet',
+        method: paymentType === 'simulated_card' ? 'Visa •••• 4242' : 'AP2 Agent Wallet',
       });
 
       await refreshData();
-      router.push(`/order/${order.id}/complete`);
+      router.push(`/order/${order.orderId}/complete`);
     } catch (err) {
       console.error('Failed to complete order:', err);
     } finally {
@@ -342,13 +349,13 @@ export default function CheckoutPage() {
               {cart.items.map((item) => (
                 <div key={item.productId} className="flex justify-between items-start text-xs">
                   <div>
-                    <span className="text-white font-bold block">{item.productName}</span>
+                    <span className="text-white font-bold block">{item.product?.name}</span>
                     <span className="font-mono text-[11px] text-slate-400">
-                      {item.quantity}x @ £{item.unitPrice.toFixed(2)}
+                      {item.quantity}x @ £{(item.product?.price ?? 0).toFixed(2)}
                     </span>
                   </div>
                   <span className="font-mono font-bold text-[#38bdf8]">
-                    £{(item.unitPrice * item.quantity).toFixed(2)}
+                    £{((item.product?.price ?? 0) * item.quantity).toFixed(2)}
                   </span>
                 </div>
               ))}
@@ -367,7 +374,7 @@ export default function CheckoutPage() {
               </div>
               <div className="flex justify-between text-slate-400">
                 <span>VAT (20%):</span>
-                <span>£{cart.taxTotal.toFixed(2)}</span>
+                <span>£{((cart.total * 20) / 120).toFixed(2)}</span>
               </div>
 
               <div className="pt-2 border-t border-[#1e293b] flex justify-between font-bold text-base text-white">

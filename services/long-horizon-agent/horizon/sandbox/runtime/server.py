@@ -38,10 +38,17 @@ from __future__ import annotations
 import asyncio
 import base64
 import errno
-import fcntl
+try:
+    import fcntl
+except ImportError:
+    fcntl = None
+
+try:
+    import pty
+except ImportError:
+    pty = None
 import io
 import os
-import pty
 import shutil
 import signal
 import subprocess

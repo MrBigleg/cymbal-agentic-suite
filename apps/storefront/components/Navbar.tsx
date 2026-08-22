@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCommerce } from './CommerceContext';
+import { useTour } from './TourContext';
 import { StoreSelectorModal } from './StoreSelectorModal';
 import { BuyingAssistantModal } from './BuyingAssistantModal';
 import {
@@ -13,17 +14,30 @@ import {
   Search,
   Sparkles,
   MapPin,
+  Compass,
 } from 'lucide-react';
 
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { selectedStore, cart } = useCommerce();
+  const { openTourModal } = useTour();
   const [isStoreModalOpen, setIsStoreModalOpen] = useState(false);
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const cartItemCount = cart.items.reduce((acc, i) => acc + i.quantity, 0);
+
+  useEffect(() => {
+    const handleTourAction = (e: Event) => {
+      const customEvent = e as CustomEvent<{ actionId: string }>;
+      if (customEvent.detail?.actionId === 'OPEN_AI_ASSISTANT') {
+        setIsAssistantOpen(true);
+      }
+    };
+    window.addEventListener('cymbal-tour-action', handleTourAction);
+    return () => window.removeEventListener('cymbal-tour-action', handleTourAction);
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +65,7 @@ export function Navbar() {
 
           {/* Selected Depot Selector Pill */}
           <div
+            data-tour="depot-selector"
             onClick={() => setIsStoreModalOpen(true)}
             className="cymbal-box-md px-3 py-1.5 cursor-pointer group hover:border-[#38bdf8] transition-colors flex items-center gap-2"
           >
@@ -89,6 +104,16 @@ export function Navbar() {
         {/* Right Navigation & Cart */}
         <div className="flex items-center space-x-3 sm:space-x-4">
           <button
+            onClick={openTourModal}
+            className="cymbal-btn-secondary px-2.5 py-1.5 text-xs hidden sm:flex items-center gap-1.5 hover:border-[#38bdf8]"
+            title="Interactive App & Architecture Tour"
+          >
+            <Compass className="w-3.5 h-3.5 text-[#38bdf8]" />
+            <span className="font-mono text-[11px]">Tour</span>
+          </button>
+
+          <button
+            data-tour="ai-assistant-btn"
             onClick={() => setIsAssistantOpen(true)}
             className="cymbal-btn-primary px-3 py-1.5 text-xs flex items-center gap-1.5"
           >
@@ -105,6 +130,7 @@ export function Navbar() {
           </Link>
 
           <Link
+            data-tour="demo-controls-link"
             href="/demo-controls"
             className="cymbal-tag hidden lg:inline-flex items-center gap-1.5 text-[#f59e0b] border-amber-500/40 bg-amber-500/10 hover:border-amber-400 transition-colors"
           >
@@ -114,6 +140,7 @@ export function Navbar() {
 
           {/* Cart Icon with badge */}
           <Link
+            data-tour="cart-nav-icon"
             href="/cart"
             className="relative cursor-pointer text-slate-200 hover:text-[#38bdf8] transition-colors p-1"
           >

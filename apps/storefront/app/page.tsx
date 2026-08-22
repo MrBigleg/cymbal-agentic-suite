@@ -120,7 +120,7 @@ export default function HomePage() {
       </section>
 
       {/* Reg / Tyre Size Search Box Overlap */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div data-tour="hero-search-widget" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <TyreSearchWidget />
       </div>
 

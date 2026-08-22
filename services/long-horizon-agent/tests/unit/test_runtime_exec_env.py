@@ -12,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
 import pytest
 
 from horizon.sandbox.runtime.protocol import ExecRequest
 from horizon.sandbox.runtime.server import exec_command
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="Sandbox runtime server uses POSIX pty/exec")
 @pytest.mark.asyncio
 async def test_exec_passes_injected_env_to_subprocess():
     req = ExecRequest(command='echo "$LHA_SPIKE"', env={"LHA_SPIKE": "ok"})
@@ -26,6 +28,7 @@ async def test_exec_passes_injected_env_to_subprocess():
     assert resp.stdout.strip() == "ok"
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="Sandbox runtime server uses POSIX pty/exec")
 @pytest.mark.asyncio
 async def test_exec_without_env_still_runs():
     resp = await exec_command(ExecRequest(command="echo hi"))

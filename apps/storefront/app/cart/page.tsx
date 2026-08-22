@@ -64,7 +64,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div data-tour="cart-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -129,8 +129,8 @@ export default function CartPage() {
               <div className="flex items-center gap-4 flex-1">
                 <div className="w-20 h-20 rounded-t-lg rounded-br-lg rounded-bl-none bg-[#111a30] border border-[#1e293b] flex items-center justify-center shrink-0 p-2">
                   <Image
-                    src={item.productImage || '/tyres/goodyear-eagle-f1.png'}
-                    alt={item.productName}
+                    src={item.product?.image || '/tyres/goodyear-eagle-f1.png'}
+                    alt={item.product?.name || 'Tyre'}
                     width={80}
                     height={80}
                     className="object-contain max-h-16 drop-shadow-md"
@@ -139,15 +139,15 @@ export default function CartPage() {
 
                 <div className="space-y-1">
                   <span className="cymbal-stamp bg-[#111a30] text-[#38bdf8] border border-[#1e293b] text-[9px]">
-                    {item.brand}
+                    {item.product?.brand || 'CYMBAL'}
                   </span>
                   <h3 className="font-bold text-base text-white leading-tight">
-                    {item.productName}
+                    {item.product?.name}
                   </h3>
                   <div className="text-xs font-mono text-slate-400 flex items-center gap-2">
-                    <span className="text-[#38bdf8]">{item.tyreSize}</span>
+                    <span className="text-[#38bdf8]">{item.product?.tyreSize}</span>
                     <span>•</span>
-                    <span>£{item.unitPrice.toFixed(2)} / tyre</span>
+                    <span>£{(item.product?.price ?? 0).toFixed(2)} / tyre</span>
                   </div>
                   <div className="text-[11px] font-mono text-emerald-400 flex items-center gap-1 pt-0.5">
                     {item.fittingOption === 'mobile' ? (
@@ -197,7 +197,7 @@ export default function CartPage() {
 
                 <div className="text-right">
                   <div className="font-mono text-lg font-black text-[#38bdf8]">
-                    £{(item.unitPrice * item.quantity + (item.fittingOption === 'mobile' ? 15 * item.quantity : 0)).toFixed(2)}
+                    £{(((item.product?.price ?? 0) * item.quantity) + (item.fittingOption === 'mobile' ? 15 * item.quantity : 0)).toFixed(2)}
                   </div>
                   <div className="font-mono text-[9px] text-slate-500 uppercase">
                     inc. VAT & fittings
@@ -228,13 +228,13 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between text-slate-400">
                 <span>VAT (20% Included):</span>
-                <span>£{cart.taxTotal.toFixed(2)}</span>
+                <span>£{((cart.total * 20) / 120).toFixed(2)}</span>
               </div>
 
-              {cart.discountTotal > 0 && (
+              {cart.discount > 0 && (
                 <div className="flex justify-between text-emerald-400 font-bold">
                   <span>Recovery Promo Discount:</span>
-                  <span>-£{cart.discountTotal.toFixed(2)}</span>
+                  <span>-£{cart.discount.toFixed(2)}</span>
                 </div>
               )}
 

@@ -6,9 +6,9 @@ Started: 2026-08-22
 ## Tasks
 - [x] Task 1: Global Tailwind Token & Asymmetric CSS Utility Setup (commit 1156588)
 - [x] Task 2: Storefront Header, Navbar & Footer Styling (commit 1f995bf)
-- [ ] Task 3: Homepage & Tyre Search Fitment Widget
-- [ ] Task 4: Product Card & Tyre Badge System
-- [ ] Task 5: Catalog & Product Detail Pages
-- [ ] Task 6: Interactive Modals, Cart & Checkout Flows
-- [ ] Task 7: Manager Portal & Incident Audit Dossiers
+- [x] Task 3: Homepage & Tyre Search Fitment Widget (commit 3913c32)
+- [x] Task 4: Product Card & Tyre Badge System (commit 6e7f5d9)
+- [x] Task 5: Catalog & Product Detail Pages (commit ca2e579)
+- [x] Task 6: Interactive Modals, Cart & Checkout Flows (commit 6d1d560)
+- [x] Task 7: Manager Portal & Incident Audit Dossiers (commit 97d4f8c)
 - [ ] Task 8: Full Test Suite, Programmatic Smoke Test & Verification

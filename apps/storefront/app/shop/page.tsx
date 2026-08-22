@@ -105,7 +105,7 @@ function ShopContent() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       {/* Top Breadcrumb & Store Quick Switch Bar */}
-      <div className="cymbal-box-lg p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div data-tour="shop-catalog-hero" className="cymbal-box-lg p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <span className="cymbal-stamp bg-[#38bdf8] text-[#020617]">DEPOT CATALOG</span>

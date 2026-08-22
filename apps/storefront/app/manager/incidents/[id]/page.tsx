@@ -10,7 +10,7 @@ export default function IncidentDossierPage() {
   const incidentId = (params?.id as string) || "inc_001";
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <div data-tour="manager-incident-dossier" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       <Link href="/manager" className="text-xs font-mono text-[#38bdf8] hover:underline flex items-center gap-1">
         <ArrowLeft className="w-4 h-4" /> [BACK_TO_OPERATIONS_DASHBOARD]
       </Link>
@@ -32,7 +32,7 @@ export default function IncidentDossierPage() {
           </p>
         </div>
 
-        <div className="flex gap-3">
+        <div data-tour="hitl-action-buttons" className="flex gap-3">
           <button className="cymbal-btn-primary px-4 py-2 text-xs flex items-center gap-1.5 shadow-[2px_2px_0px_#020617]">
             <CheckCircle2 className="w-4 h-4 text-white" />
             <span>Mark Resolved</span>
@@ -42,7 +42,7 @@ export default function IncidentDossierPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 1. Customer & Incident Context */}
-        <div className="cymbal-box-lg p-5 space-y-4">
+        <div data-tour="incident-metrics-panel" className="cymbal-box-lg p-5 space-y-4">
           <h2 className="font-bold text-xs uppercase tracking-wider text-white border-b border-[#1e293b] pb-2 flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 text-[#f43f5e]" /> 1. Survey & Customer Context
           </h2>
@@ -71,7 +71,7 @@ export default function IncidentDossierPage() {
         </div>
 
         {/* 2. Evidence Stack */}
-        <div className="cymbal-box-lg p-5 space-y-4">
+        <div data-tour="sentiment-insights-panel" className="cymbal-box-lg p-5 space-y-4">
           <h2 className="font-bold text-xs uppercase tracking-wider text-white border-b border-[#1e293b] pb-2 flex items-center gap-2">
             <TrendingDown className="w-4 h-4 text-amber-400" /> 2. Places Insights & BigQuery Stack
           </h2>

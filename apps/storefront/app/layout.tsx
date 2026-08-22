@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import 'driver.js/dist/driver.css';
 import { CommerceProvider } from '@/components/CommerceContext';
+import { TourProvider } from '@/components/TourContext';
+import { TourLauncher } from '@/components/TourLauncher';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { NotificationToastContainer } from '@/components/NotificationToast';
@@ -17,13 +20,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="h-full">
       <body className="min-h-full flex flex-col bg-[#060913] text-[#f1f5f9] antialiased selection:bg-sky-500 selection:text-white" suppressHydrationWarning>
         <CommerceProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <NotificationToastContainer />
-          <BuyingAssistantButton />
+          <TourProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <NotificationToastContainer />
+            <BuyingAssistantButton />
+            <TourLauncher />
+          </TourProvider>
         </CommerceProvider>
       </body>
     </html>
   );
 }
+

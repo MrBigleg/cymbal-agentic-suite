@@ -93,6 +93,9 @@ def test_import_horizon_and_build_agent_without_credentials():
         "CLOUDSDK_CONFIG": "/nonexistent",
         "GOOGLE_CLOUD_PROJECT": "",
     }
+    for k in ("SYSTEMROOT", "WINDIR", "SystemDrive", "TEMP", "TMP", "USERPROFILE", "HOME", "HOMEPATH", "HOMEDRIVE"):
+        if k in os.environ:
+            env[k] = os.environ[k]
     code = "import horizon.agent as a; print(a.root_agent.name)"
     r = subprocess.run(
         [sys.executable, "-c", code],
