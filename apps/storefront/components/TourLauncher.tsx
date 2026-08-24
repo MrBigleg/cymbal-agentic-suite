@@ -14,7 +14,9 @@ import {
   Play,
   Copy,
   ExternalLink,
+  GripVertical,
 } from "lucide-react";
+import { motion } from "motion/react";
 
 export function TourLauncher() {
   const { isTourActive, isTourModalOpen, openTourModal, closeTourModal, startTour } = useTour();
@@ -33,30 +35,44 @@ export function TourLauncher() {
 
   return (
     <>
-      {/* Floating Launcher Trigger Pill (always available unless active) */}
+      {/* Floating Draggable Launcher Trigger Pill (always available unless active) */}
       {!isTourActive && (
-        <aside
-          aria-label="Guided Tour Controls"
-          className="fixed bottom-6 right-6 z-50 animate-bounce hover:animate-none transition-all"
+        <motion.aside
+          drag
+          dragMomentum={false}
+          whileDrag={{ scale: 1.05, cursor: "grabbing" }}
+          aria-label="Guided Tour Controls (Draggable)"
+          className="fixed bottom-6 right-6 z-50 transition-shadow select-none touch-none"
         >
-          <button
-            onClick={openTourModal}
-            className="group flex items-center gap-2.5 px-4 py-2.5 bg-[#0c1222]/95 hover:bg-[#111a30] text-white border-2 border-[#38bdf8] rounded-t-lg rounded-br-lg rounded-bl-none shadow-[4px_4px_0px_#020617] hover:shadow-[6px_6px_0px_#0284c7] transition-all cursor-pointer backdrop-blur-md"
-          >
-            <div className="w-6 h-6 rounded-full bg-[#0284c7]/20 border border-[#38bdf8] flex items-center justify-center text-[#38bdf8] group-hover:rotate-45 transition-transform">
-              <Compass className="w-3.5 h-3.5" />
+          <div className="group flex items-center bg-[#0c1222]/95 hover:bg-[#111a30] text-white border-2 border-[#38bdf8] rounded-t-lg rounded-br-lg rounded-bl-none shadow-[4px_4px_0px_#020617] hover:shadow-[6px_6px_0px_#0284c7] backdrop-blur-md transition-all">
+            {/* Dedicated Drag Handle */}
+            <div
+              className="pl-2 pr-1 py-3 text-slate-500 hover:text-[#38bdf8] cursor-grab active:cursor-grabbing flex items-center justify-center transition-colors"
+              title="Drag to reposition guide anywhere"
+            >
+              <GripVertical className="w-3.5 h-3.5" />
             </div>
-            <div className="flex flex-col text-left">
-              <span className="text-[10px] font-mono text-[#38bdf8] font-black uppercase tracking-wider leading-none">
-                Interactive Guide
-              </span>
-              <span className="text-xs font-bold text-white group-hover:text-[#38bdf8] transition-colors leading-tight">
-                Judge & Shopper Tours
-              </span>
-            </div>
-            <Sparkles className="w-4 h-4 text-amber-400 ml-1 group-hover:scale-110 transition-transform" />
-          </button>
-        </aside>
+
+            {/* Action Trigger Button */}
+            <button
+              onClick={openTourModal}
+              className="flex items-center gap-2.5 pl-1 pr-4 py-2.5 cursor-pointer text-left focus:outline-none"
+            >
+              <div className="w-6 h-6 rounded-full bg-[#0284c7]/20 border border-[#38bdf8] flex items-center justify-center text-[#38bdf8] group-hover:rotate-45 transition-transform shrink-0">
+                <Compass className="w-3.5 h-3.5" />
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-[10px] font-mono text-[#38bdf8] font-black uppercase tracking-wider leading-none">
+                  Interactive Guide
+                </span>
+                <span className="text-xs font-bold text-white group-hover:text-[#38bdf8] transition-colors leading-tight">
+                  Judge & Shopper Tours
+                </span>
+              </div>
+              <Sparkles className="w-4 h-4 text-amber-400 ml-1 group-hover:scale-110 transition-transform shrink-0" />
+            </button>
+          </div>
+        </motion.aside>
       )}
 
       {/* Tour Selection Modal */}
