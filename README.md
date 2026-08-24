@@ -47,12 +47,30 @@ cymbal-agentic-suite/
 │   ├── commerce-protocol/      # Shared AP2 v0.2 (checkout_hash), UCP, and A2A schemas
 │   └── deterministic-policy/   # Pure deterministic logic (RecoveryOfferPolicy, PurchaseIntentMatcher, AP2Verifier)
 ├── docs/
-│   ├── AGENT_ARCHITECTURE.md   # Long Horizon hierarchy, 3-tier system prompts, guardrails
-│   ├── PROTOCOL_SPEC.md        # AP2 v0.2 checkout_hash, SD-JWT-VC, and A2A message contracts
-│   ├── GOOGLE_CHAT_GUIDE.md    # In-place interactive card life-cycle & app authentication
-│   └── superpowers/specs/      # Approved Architectural Specifications & Plans
-└── docker-compose.yml          # 1-command reproducible spin-up for judges
+│   ├── VISUAL_WALKTHROUGH_AND_SCREENSHOTS.md # Complete visual tour with 8 high-res annotated screenshots
+│   ├── assets/screenshots/                   # PNG screenshots of all UI, agentic, and operational surfaces
+│   ├── AGENT_ARCHITECTURE.md                 # Long Horizon hierarchy, 3-tier system prompts, guardrails
+│   ├── PROTOCOL_SPEC.md                      # AP2 v0.2 checkout_hash, SD-JWT-VC, and A2A message contracts
+│   ├── GOOGLE_CHAT_GUIDE.md                  # In-place interactive card life-cycle & app authentication
+│   ├── SECURITY_EVALUATION_AND_HARDENING.md  # Threat modeling, cryptographic proofs, and SAIF compliance
+│   ├── LOCAL_TESTING_AND_VERIFICATION.md     # Smoke testing harness & multi-layer verification guide
+│   └── SESSION_HISTORY.md                    # Detailed engineering session changelogs & architectural decisions
+└── docker-compose.yml                        # 1-command reproducible spin-up for judges
 ```
+
+---
+
+## 📸 Visual Walkthrough & System Screenshots
+
+> **[👉 View Full Screenshot Gallery & Technical Annotations (VISUAL_WALKTHROUGH_AND_SCREENSHOTS.md)](docs/VISUAL_WALKTHROUGH_AND_SCREENSHOTS.md)**
+
+| Homepage & Fitment Search | Guided Evaluator Tour (Driver.js) |
+| :---: | :---: |
+| ![Homepage Hero](docs/assets/screenshots/01_homepage_hero.png) | ![Guided Tours Modal](docs/assets/screenshots/02_guided_tours_modal.png) |
+| **Gemini 3.7 Flash Buying Assistant** | **Fitted Wheel & Tyre Package Visualizer** |
+| ![Gemini Buying Assistant](docs/assets/screenshots/03_gemini_buying_assistant.png) | ![Fitted Wheel Package](docs/assets/screenshots/05_fitted_wheel_package.png) |
+| **Live Protocol Simulator & Telemetry** | **Manager Incident Audit Dossier & HITL Cards** |
+| ![Demo Telemetry](docs/assets/screenshots/06_demo_protocol_telemetry.png) | ![Incident Audit Dossier](docs/assets/screenshots/08_incident_audit_dossier.png) |
 
 ---
 
