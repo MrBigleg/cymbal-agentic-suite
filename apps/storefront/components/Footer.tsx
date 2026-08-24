@@ -105,13 +105,21 @@ export function Footer() {
             <p className="text-[11px] text-slate-400 leading-relaxed mb-3">
               Autonomous commerce powered by Google ADK 2.5, Gemini 3.7 Flash, AP2 v0.2, and A2A negotiation.
             </p>
-            <Link
-              href="/demo-controls"
-              className="cymbal-btn-primary inline-flex items-center gap-1.5 text-xs px-3 py-1.5"
-            >
-              <span>Operator Demo Controls</span>
-              <ArrowRight className="w-3 h-3" />
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Link
+                href="/telemetry"
+                className="cymbal-btn-primary inline-flex items-center gap-1.5 text-xs px-3 py-1.5"
+              >
+                <span>Live Observation Deck</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+              <Link
+                href="/demo-controls"
+                className="cymbal-btn-secondary inline-flex items-center gap-1.5 text-xs px-3 py-1.5"
+              >
+                <span>Simulator</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -126,6 +134,12 @@ export function Footer() {
           </span>
         </div>
         <div className="flex items-center space-x-4">
+          <Link
+            href="/telemetry"
+            className="text-emerald-400 font-mono text-[10px] font-bold hover:underline"
+          >
+            Live Telemetry
+          </Link>
           <Link
             href="/demo-controls"
             className="text-amber-400 font-mono text-[10px] font-bold hover:underline"

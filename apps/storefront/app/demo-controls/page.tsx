@@ -1,21 +1,27 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Play, Sparkles, AlertTriangle, ShoppingCart, PackageCheck, CheckCircle2, Sliders } from "lucide-react";
+import Link from "next/link";
+import { Play, Sparkles, AlertTriangle, ShoppingCart, PackageCheck, CheckCircle2, Sliders, Terminal, ExternalLink } from "lucide-react";
+import { LiveProtocolDeck } from "@/components/LiveProtocolDeck";
+import { protocolStreamService } from "@/lib/services/protocolStreamService";
 
 export default function DemoControlsPage() {
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const triggerCartStalling = () => {
     setStatusMessage("⚡ Dispatched `commerce.checkout.stalled` -> Long Horizon evaluated RecoveryOfferPolicy (5% discount, 2h TTL) -> A2A `commerce.recovery.offer` sent to Buyer Agent.");
+    protocolStreamService.triggerManualSimulation('STALLED_CART');
   };
 
   const triggerStockReplenish = () => {
     setStatusMessage("📦 Dispatched `inventory.replenished` (Depot #101) -> Deterministic Matcher matched Open Checkout Mandate -> Signed Checkout JWT generated & Closed Mandate verified with `checkout_hash`.");
+    protocolStreamService.triggerManualSimulation('STOCK_ARRIVAL');
   };
 
   const triggerSurveyDetractor = () => {
     setStatusMessage("⚠️ Dispatched `customer.survey.submitted` (Score: 2/10) -> Dispatched neutral Google Review link -> Posted interactive card to Manager's Google Chat with in-place action buttons.");
+    protocolStreamService.triggerManualSimulation('SURVEY_DETRACTOR');
   };
 
   useEffect(() => {
@@ -45,9 +51,18 @@ export default function DemoControlsPage() {
             Competition Live Demo Control Center
           </h1>
           <p className="text-xs text-slate-400 mt-0.5 font-mono">
-            Simulate real-time events across the 3 autonomous customer lifecycle loops.
+            Simulate real-time events across the 3 autonomous customer lifecycle loops and inspect protocol chatter.
           </p>
         </div>
+
+        <Link
+          href="/telemetry"
+          className="cymbal-btn-primary px-3.5 py-2 text-xs flex items-center gap-2 shrink-0 font-mono"
+        >
+          <Terminal className="w-4 h-4 text-[#38bdf8]" />
+          <span>Full Observation Deck</span>
+          <ExternalLink className="w-3.5 h-3.5" />
+        </Link>
       </div>
 
       {/* Simulator Trigger Buttons */}
@@ -124,6 +139,12 @@ export default function DemoControlsPage() {
           <p className="text-xs font-mono text-slate-200 leading-relaxed">{statusMessage}</p>
         </div>
       )}
+
+      {/* Embedded Live Protocol Chatter Console */}
+      <div className="pt-2">
+        <LiveProtocolDeck compact={true} showHeader={false} />
+      </div>
     </div>
   );
 }
+

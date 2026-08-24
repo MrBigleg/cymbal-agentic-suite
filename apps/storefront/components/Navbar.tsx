@@ -15,6 +15,8 @@ import {
   Sparkles,
   MapPin,
   Compass,
+  Terminal,
+  Activity,
 } from 'lucide-react';
 
 export function Navbar() {
@@ -127,6 +129,15 @@ export function Navbar() {
             className="text-xs font-bold text-slate-300 hover:text-[#38bdf8] transition-colors hidden md:inline"
           >
             Book Fitting
+          </Link>
+
+          <Link
+            data-tour="telemetry-link"
+            href="/telemetry"
+            className="cymbal-tag hidden xl:inline-flex items-center gap-1.5 text-emerald-400 border-emerald-500/40 bg-emerald-500/10 hover:border-emerald-400 transition-colors"
+          >
+            <Activity className="w-3 h-3 text-emerald-400 animate-pulse" />
+            <span>LIVE_TELEMETRY</span>
           </Link>
 
           <Link
