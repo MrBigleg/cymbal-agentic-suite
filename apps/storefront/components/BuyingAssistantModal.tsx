@@ -208,10 +208,10 @@ export function BuyingAssistantModal({
             <button
               onClick={handleManualEscalate}
               disabled={isEscalating}
-              className="cymbal-btn-secondary px-3 py-1.5 text-xs font-mono flex items-center gap-1.5 shrink-0"
+              className="cymbal-btn-secondary px-3 py-1.5 text-xs font-mono flex items-center gap-1.5 shrink-0 cursor-pointer"
             >
               <UserCheck className="w-3.5 h-3.5 text-[#38bdf8]" />
-              <span>{isEscalating ? 'Assigning...' : '[TALK_TO_TECHNICIAN]'}</span>
+              <span>{isEscalating ? 'Assigning...' : 'Talk to Technician'}</span>
             </button>
           </div>
 

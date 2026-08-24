@@ -130,10 +130,10 @@ export function Footer() {
             href="/demo-controls"
             className="text-amber-400 font-mono text-[10px] font-bold hover:underline"
           >
-            [DEMO_CONTROLS]
+            Demo Controls
           </Link>
           <Link href="/shop" className="hover:text-[#38bdf8] font-mono text-[10px]">
-            [BOOK_FITTING]
+            Book Fitting
           </Link>
           <span className="font-mono text-[10px] text-slate-500">BHM • BRS • CRY</span>
         </div>

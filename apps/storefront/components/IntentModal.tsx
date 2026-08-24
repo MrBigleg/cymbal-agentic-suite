@@ -311,7 +311,7 @@ export function IntentModal({ isOpen, onClose, product }: IntentModalProps) {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Status:</span>
-                  <span className="text-[#10b981] font-bold">[ACTIVE_MONITORING]</span>
+                  <span className="text-[#10b981] font-bold font-mono text-[10px] uppercase tracking-wider">Active Monitoring</span>
                 </div>
               </div>
 

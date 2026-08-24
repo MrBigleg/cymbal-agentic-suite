@@ -82,7 +82,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
         <Link href="/shop" className="hover:text-[#38bdf8] flex items-center gap-1">
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>[CATALOG]</span>
+          <span>Back to Catalog</span>
         </Link>
         <span>/</span>
         <span className="font-semibold text-slate-300 uppercase">{product.brand}</span>
@@ -203,7 +203,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     <div className="flex items-center gap-2">
                       <MapPin className="w-3.5 h-3.5 text-[#38bdf8]" />
                       <span className="text-slate-200 font-bold">{s.name}</span>
-                      {isCur && <span className="font-mono text-[10px] text-[#38bdf8] font-bold">[ACTIVE_DEPOT]</span>}
+                      {isCur && <span className="font-mono text-[10px] text-[#38bdf8] font-bold uppercase tracking-wider bg-[#38bdf8]/10 px-1.5 py-0.5 rounded-xs border border-[#38bdf8]/30">Active Depot</span>}
                     </div>
                     <StockStatusBadge
                       state={sStock?.state || 'Out of Stock'}
@@ -291,9 +291,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <button
                 type="button"
                 onClick={() => setIsStoreModalOpen(true)}
-                className="text-xs font-mono font-bold text-[#38bdf8] hover:underline shrink-0"
+                className="text-xs font-mono font-bold text-[#38bdf8] hover:underline shrink-0 cursor-pointer"
               >
-                [CHANGE_DEPOT]
+                Change Depot
               </button>
             </div>
 

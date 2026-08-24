@@ -137,9 +137,9 @@ export function StoreSelectorModal({
             </span>
             <button
               onClick={onClose}
-              className="cymbal-btn-secondary px-4 py-1.5 text-xs font-mono"
+              className="cymbal-btn-secondary px-4 py-1.5 text-xs font-mono cursor-pointer"
             >
-              [DONE]
+              Done
             </button>
           </div>
         </motion.div>

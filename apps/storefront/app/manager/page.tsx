@@ -85,7 +85,10 @@ export default function ManagerDashboardPage() {
             <AlertCircle className="w-4 h-4 text-amber-400" />
             Real-Time Google Chat Escalation Queue
           </h2>
-          <span className="font-mono text-[10px] text-slate-400">[STREAM_CONNECTED]</span>
+          <span className="font-mono text-[10px] text-emerald-400 font-bold flex items-center gap-1.5 bg-emerald-500/10 px-2 py-0.5 rounded-xs border border-emerald-500/30">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Live Stream Connected
+          </span>
         </div>
 
         <div className="cymbal-box-md p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-[#881337]">

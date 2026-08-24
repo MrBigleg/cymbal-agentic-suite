@@ -259,7 +259,7 @@ export default function HomePage() {
                 className="cymbal-btn-secondary px-4 py-2.5 text-xs font-mono flex items-center gap-2"
               >
                 <Sliders className="w-3.5 h-3.5 text-amber-400" />
-                <span>[OPEN_DEMO_PANEL]</span>
+                <span>Open Demo Controls</span>
               </Link>
             </div>
           </div>

@@ -139,7 +139,7 @@ export default function CheckoutPage() {
         <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
           <Link href="/cart" className="hover:text-[#38bdf8] flex items-center gap-1">
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>[BASKET]</span>
+            <span>Return to Basket</span>
           </Link>
           <span>/</span>
           <span className="text-[#38bdf8] font-bold">UCP 4-STAGE CHECKOUT</span>
@@ -398,7 +398,7 @@ export default function CheckoutPage() {
                 href="/demo-controls"
                 className="cymbal-btn-secondary w-full py-1.5 text-center block text-[11px] font-mono"
               >
-                [OPEN_DEMO_PANEL]
+                Open Demo Controls
               </Link>
             </div>
           </div>

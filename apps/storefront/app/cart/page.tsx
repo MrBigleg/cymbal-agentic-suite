@@ -86,10 +86,10 @@ export default function CartPage() {
         <button
           type="button"
           onClick={clearCart}
-          className="font-mono text-xs text-[#f43f5e] hover:underline flex items-center gap-1 font-semibold self-start sm:self-auto"
+          className="font-mono text-xs text-[#f43f5e] hover:underline flex items-center gap-1 font-semibold self-start sm:self-auto cursor-pointer"
         >
           <Trash2 className="w-3.5 h-3.5" />
-          <span>[CLEAR_ALL_ITEMS]</span>
+          <span>Clear All Items</span>
         </button>
       </div>
 
@@ -114,9 +114,9 @@ export default function CartPage() {
             <button
               type="button"
               onClick={() => setIsStoreModalOpen(true)}
-              className="text-xs font-mono font-bold text-[#38bdf8] hover:underline shrink-0"
+              className="text-xs font-mono font-bold text-[#38bdf8] hover:underline shrink-0 cursor-pointer"
             >
-              [CHANGE_DEPOT]
+              Change Depot
             </button>
           </div>
 

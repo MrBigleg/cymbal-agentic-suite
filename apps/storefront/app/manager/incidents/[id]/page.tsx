@@ -11,8 +11,8 @@ export default function IncidentDossierPage() {
 
   return (
     <div data-tour="manager-incident-dossier" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-      <Link href="/manager" className="text-xs font-mono text-[#38bdf8] hover:underline flex items-center gap-1">
-        <ArrowLeft className="w-4 h-4" /> [BACK_TO_OPERATIONS_DASHBOARD]
+      <Link href="/manager" className="text-xs font-mono text-[#38bdf8] hover:underline flex items-center gap-1.5 cursor-pointer">
+        <ArrowLeft className="w-4 h-4" /> Back to Operations Dashboard
       </Link>
 
       <div className="cymbal-box-lg p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">

@@ -119,7 +119,7 @@ export default function DemoControlsPage() {
       {statusMessage && (
         <div className="cymbal-box-lg p-5 space-y-2 border-[#0284c7] bg-[#0c162d]">
           <div className="flex items-center gap-2 text-[#38bdf8] text-xs font-bold font-mono">
-            <CheckCircle2 className="w-4 h-4 text-[#10b981]" /> [EVENT_DISPATCHED_AND_HANDLED]
+            <CheckCircle2 className="w-4 h-4 text-[#10b981]" /> Event Dispatched & Handled
           </div>
           <p className="text-xs font-mono text-slate-200 leading-relaxed">{statusMessage}</p>
         </div>
