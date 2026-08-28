@@ -37,6 +37,31 @@ The Cymbal Agentic Suite consists of microservices designed to run serverlessly 
 
 ---
 
+## ⚡ 1-Click Automated Deployment Scripts
+
+For convenience, ready-to-run deployment automation scripts are provided in the `scripts/` directory:
+
+### Bash / Linux / macOS / Cloud Shell:
+```bash
+# 1. Ensure your Gemini API Key is exported (or present in Secret Manager)
+export GEMINI_API_KEY="your-gemini-api-key"
+
+# 2. Deploy both Agent and Storefront
+chmod +x ./scripts/deploy_cloud_run.sh
+./scripts/deploy_cloud_run.sh --project-id "your-gcp-project-id" --region us-central1
+```
+
+### Windows PowerShell:
+```powershell
+# 1. Set environment API Key
+$env:GEMINI_API_KEY = "your-gemini-api-key"
+
+# 2. Deploy both services
+.\scripts\deploy_cloud_run.ps1 -ProjectId "your-gcp-project-id" -Region us-central1
+```
+
+---
+
 ## 📋 1. Prerequisites & GCP Project Setup
 
 ### 1.1 Set Environment Variables

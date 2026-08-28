@@ -1,0 +1,26 @@
+# Root .dockerignore
+.git
+.gitignore
+.env
+.env*.local
+*.md
+docs/
+.superpowers/
+.gemini/
+scripts/
+
+# Node
+node_modules
+.next
+out
+build
+dist
+.pnpm-store
+
+# Python
+__pycache__
+*.pyc
+.pytest_cache
+.venv
+venv/
+*.egg-info

@@ -94,6 +94,16 @@ docker compose up --build
 | **Manager Incident Center** | `http://localhost:3000/manager/incidents/inc_001` | Escalation dossier with BigQuery & Places Insights evidence |
 | **Long Horizon Agent API** | `http://localhost:8000/a2a` | Python ADK 2.5 Agent-to-Agent JSON-RPC endpoint |
 
+### 3. Deploy to Google Cloud Run (1-Click)
+```bash
+# Automated deployment of Agent & Storefront with Secret Manager integration
+./scripts/deploy_cloud_run.sh --project-id "your-gcp-project-id" --region us-central1
+
+# Or on Windows PowerShell:
+.\scripts\deploy_cloud_run.ps1 -ProjectId "your-gcp-project-id" -Region us-central1
+```
+> For complete IAM policies, multi-stage Dockerfile specs, and private A2A auth, see [**docs/CLOUD_RUN_DEPLOYMENT_GUIDE.md**](docs/CLOUD_RUN_DEPLOYMENT_GUIDE.md).
+
 ---
 
 ## 🔄 The 3 Core Autonomous Loops
