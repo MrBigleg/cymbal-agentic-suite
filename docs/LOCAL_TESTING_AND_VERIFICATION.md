@@ -168,7 +168,9 @@ docker stop cymbal-agent-container
 ---
 
 ## ☁️ 5. Google Cloud Run Deployment Readiness Checklist
-
+ 
+> For the complete step-by-step deployment guide, IAM policies, and Secret Manager configuration, see [**docs/CLOUD_RUN_DEPLOYMENT_GUIDE.md**](CLOUD_RUN_DEPLOYMENT_GUIDE.md).
+ 
 | Category | Verification Item | Status | Hardening Reference |
 | :--- | :--- | :--- | :--- |
 | **Port Binding** | Application listens on dynamic `$PORT` environment variable | ✅ Verified | Configured in FastAPI & Dockerfile |

@@ -47,6 +47,7 @@ cymbal-agentic-suite/
 │   ├── commerce-protocol/      # Shared AP2 v0.2 (checkout_hash), UCP, and A2A schemas
 │   └── deterministic-policy/   # Pure deterministic logic (RecoveryOfferPolicy, PurchaseIntentMatcher, AP2Verifier)
 ├── docs/
+│   ├── CLOUD_RUN_DEPLOYMENT_GUIDE.md         # Production Google Cloud Run deployment & container guide
 │   ├── VISUAL_WALKTHROUGH_AND_SCREENSHOTS.md # Complete visual tour with 8 high-res annotated screenshots
 │   ├── assets/screenshots/                   # PNG screenshots of all UI, agentic, and operational surfaces
 │   ├── AGENT_ARCHITECTURE.md                 # Long Horizon hierarchy, 3-tier system prompts, guardrails
@@ -144,6 +145,7 @@ python scripts/smoke_test.py --target agent --port 8080
 
 ## 📜 Documentation Directory
 
+- ☁️ [**Google Cloud Run Deployment Guide (Production & Serverless)**](docs/CLOUD_RUN_DEPLOYMENT_GUIDE.md)
 - 🎨 [**Master Design System Specification (Wiry Neo-Brutalist)**](design.md)
 - 📜 [**Development Session History (What & Why Changelog)**](docs/SESSION_HISTORY.md)
 - 🧪 [**Local Testing & Verification Guide (Cloud Run Parity)**](docs/LOCAL_TESTING_AND_VERIFICATION.md)
