@@ -1,6 +1,6 @@
 # 🏎️ Cymbal Agentic Customer Lifecycle & Revenue Recovery Suite
 
-> **Built for the Google & Kaggle Agentic AI Hackathon**  
+> **Built for the Google #AllThingsAgenticHackathon.**  
 > An autonomous, protocol-driven commerce and reputation suite powered by **Google ADK 2.5**, **Gemini 3.7 Flash**, **AP2 v0.2 (Autonomous Payment Protocol)**, **Agent-to-Agent (A2A)**, and **Universal Commerce Protocol (UCP)**.
 
 ---
