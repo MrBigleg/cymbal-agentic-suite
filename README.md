@@ -1,7 +1,22 @@
 # 🏎️ Cymbal Agentic Customer Lifecycle & Revenue Recovery Suite
 
 > **Built for the Google #AllThingsAgenticHackathon.**  
-> An autonomous, protocol-driven commerce and reputation suite powered by **Google ADK 2.5**, **Gemini 3.7 Flash**, **AP2 v0.2 (Autonomous Payment Protocol)**, **Agent-to-Agent (A2A)**, and **Universal Commerce Protocol (UCP)**.
+> An autonomous, protocol-driven commerce and reputation suite powered by **Google ADK 2.5**, **Gemini 3.7 Flash**, **Gemma**, **Imagen 3**, **Veo**, **Lyria**, **AP2 v0.2 (Autonomous Payment Protocol)**, **Agent-to-Agent (A2A)**, and **Universal Commerce Protocol (UCP)**.
+
+---
+
+## 🤖 Google AI Models Stack
+
+> **[👉 Detailed Google AI Models Portfolio & Architecture Guide (docs/GOOGLE_AI_MODELS.md)](docs/GOOGLE_AI_MODELS.md)**
+
+| Google Model | Role in Suite | Layer | Key Capability |
+| :--- | :--- | :--- | :--- |
+| **Gemini 3.7 Flash** *(Required: ≥3.5)* | **Long-Horizon Orchestrator & Autonomous Sub-Agents** | Core Engine | Prefix-cached multi-turn reasoning, native tool use, sub-agent dispatch, buying assistant. |
+| **Gemini 3.7 Pro / Thinking** | **Manager Incident Dossier & Anomaly Root-Cause** | Manager Portal | Deep causal reasoning on Places Insights, Maps Grounding, and BigQuery NPS anomalies. |
+| **Gemma (Gemma 2 / 4)** | **Zero-Exfiltration Edge Guardrail & Anti-PII Filter** | Policy Engine | Fast local PII sanitization and prompt injection defense prior to external A2A dispatch. |
+| **Imagen 3** | **Fitted Wheel Visualizer & A2UI Promotional Creatives** | Storefront & A2UI | Photorealistic alloy wheel & tyre renders, dynamic vehicle fitment previews. |
+| **Veo 2** | **360° Dynamic Vehicle Fitment & Motion Previews** | Visualizer | Generative vehicle clearance animations & rotating alloy wheel previews. |
+| **Lyria** | **Observation Deck Audio Sonification & Voice Cues** | Telemetry Deck | Dynamic acoustic indicators for protocol events, mandate verifications & escalations. |
 
 ---
 

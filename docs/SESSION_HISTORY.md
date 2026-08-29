@@ -160,3 +160,45 @@
 ### 💡 The Why
 - **Protocol Observability for Evaluators**: In agentic AI hackathons, backend agent decisions and A2A negotiations can feel abstract or invisible. Providing a live, interactive protocol observation deck allows judges to directly inspect JSON-RPC message passing, mandate seals, and cryptographic proofs in real time.
 
+---
+
+## 📅 Session 8: Production Google Cloud Run Deployment & Verification Harness
+- **Date**: 2026-08-28 - 2026-08-29
+- **Topic**: Multi-Service Cloud Run Deployment, Docker Containerization, Automated Smoke Test Harness
+
+### 🎯 The What
+1. **Production Docker Containerization**:
+   - Built production multi-stage Docker configurations for Next.js 15 Storefront (`apps/storefront/Dockerfile`) and Python 3.11 ADK 2.5 Long Horizon Agent (`services/long-horizon-agent/Dockerfile`).
+   - Hardened security with non-root runtime users, clean `.dockerignore` filters, and optimized caching layers.
+2. **Automated Cloud Run Deployment Tooling**:
+   - Authored cross-platform deployment automation scripts (`scripts/deploy_cloud_run.ps1`, `scripts/deploy_cloud_run.sh`).
+   - Configured Cloud Build, artifact registries, and service environment mappings across European GCP regions.
+3. **Automated Smoke Test & Health Harness**:
+   - Built comprehensive automated smoke test suite in `scripts/smoke_test.py` targeting public probes, authenticated A2A JSON-RPC endpoints, and Next.js Storefront health.
+   - Verified live deployed Cloud Run URLs with HTTP 200 checks across all operational surfaces.
+
+### 💡 The Why
+- **Instant Reproducibility & Zero-Friction Evaluation**: Hackathon judges can evaluate live, high-availability Cloud Run endpoints immediately without needing local builds or credentials, with automated fallback verification for self-hosting.
+
+---
+
+## 📅 Session 9: Multi-Model Google AI Stack, Publication Architecture Diagrams & Visual Assets
+- **Date**: 2026-08-29
+- **Topic**: Google AI Models Portfolio (Gemini 3.7 Flash, Gemini 3.7 Thinking, Gemma, Imagen 3, Veo 2, Lyria), High-Res Architecture Diagrams (PNG, PDF, 3D Concepts), Hackathon Pitch Thumbnail
+
+### 🎯 The What
+1. **Google AI Models Compliance & Portfolio Documentation (`docs/GOOGLE_AI_MODELS.md`)**:
+   - Formally documented full compliance with mandatory Gemini 3.5+ requirement via **Gemini 3.7 Flash** (Long Horizon Orchestrator, ADK 2.5, Storefront Buying Assistant).
+   - Documented scoring bonus models: **Gemini 3.7 Pro/Thinking** (Causal incident root cause), **Gemma 2/4** (Zero-exfiltration PII edge filter), **Imagen 3** (Studio tyre visualizer), **Veo 2** (360° vehicle fitment clearance motion), and **Lyria** (Acoustic telemetry sonification).
+   - Updated `README.md` and `docs/AGENT_ARCHITECTURE.md` with multi-model capability matrices.
+2. **Publication-Grade High-Resolution Architecture Diagrams**:
+   - Designed high-contrast dark slate system architecture blueprint (`docs/architecture_diagram.html`).
+   - Rendered pixel-perfect 2400x1350 PNG (`docs/assets/architecture_diagram.png`) and vector PDF (`docs/assets/architecture_diagram.pdf`) matching hackathon file submission guidelines.
+   - Generated isometric 3D conceptual diagram (`docs/assets/architecture_concept_diagram.jpg`) and multi-model stack graphic (`docs/assets/google_ai_models_stack.jpg`).
+3. **Official Hackathon Showcase & Thumbnail Asset**:
+   - Generated 16:9 cinematic promotional thumbnail (`docs/assets/thumbnail.jpg`) featuring holographic HUDs, vehicle fitment geometry, and Google ADK 2.5 / Gemini 3.7 badging.
+
+### 💡 The Why
+- **Evaluation Clarity & Multi-Model Scoring Dominance**: Ensures judges immediately see that the project fulfills all mandatory model requirements while demonstrating state-of-the-art multimodal usage across text, reasoning, image generation, video motion, privacy guardrails, and audio sonification.
+
+

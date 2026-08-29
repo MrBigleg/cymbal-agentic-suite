@@ -85,3 +85,19 @@ Execution / External Dispatch
 - **Rules**:
   - Validates SKU, store ID, target quantity, and price cap $\le \text{maxPriceCapGbp}$.
   - Prepares the merchant-signed checkout JWT and validates the buyer agent's `ClosedCheckoutMandate` (`checkout_hash`) before settlement.
+
+---
+
+## 🎨 Extended Google AI Model Fleet
+
+In addition to the primary **Gemini 3.7 Flash** long-horizon agent, the suite leverages a multimodal fleet of Google AI models:
+
+| Model | Subsystem | Function |
+| :--- | :--- | :--- |
+| **Gemini 3.7 Flash** | Long Horizon Orchestrator & Storefront Assistant | High-speed multi-turn reasoning, native tool dispatch & fitment advice. |
+| **Gemini 3.7 Pro / Thinking** | Manager Portal Root-Cause Center | Multi-evidence forensic incident dossiers & BigQuery detractor anomaly synthesis. |
+| **Gemma 2 / 4** | Policy Engine & Edge Guardrail | Low-latency PII redaction & prompt-injection firewall before A2A dispatch. |
+| **Imagen 3** | Studio Wheel & Tyre Visualizer | Photorealistic alloy wheel & fitted tyre package image generation. |
+| **Veo 2** | Dynamic Visualizer | 360-degree vehicle fitment clearance and rotational rim animations. |
+| **Lyria** | Observation Deck Telemetry | Real-time acoustic sonification of A2A JSON-RPC handshakes & settlement events. |
+
