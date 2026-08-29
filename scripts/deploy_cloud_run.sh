@@ -102,10 +102,15 @@ if ! gcloud iam service-accounts describe "${SA_EMAIL}" --project="${PROJECT_ID}
     --project="${PROJECT_ID}"
 fi
 
-# Grant Secret Manager Secret Accessor
+# Grant Secret Manager Secret Accessor and Vertex AI User roles
 gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
   --member="serviceAccount:${SA_EMAIL}" \
   --role="roles/secretmanager.secretAccessor" \
+  --condition=None >/dev/null 2>&1 || true
+
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+  --member="serviceAccount:${SA_EMAIL}" \
+  --role="roles/aiplatform.user" \
   --condition=None >/dev/null 2>&1 || true
 
 # 4. Verify Secret Manager Secrets
@@ -136,7 +141,7 @@ if [[ "${TARGET}" == "all" || "${TARGET}" == "agent" ]]; then
     --project "${PROJECT_ID}" \
     --service-account "${SA_EMAIL}" \
     --set-secrets "GEMINI_API_KEY=GEMINI_API_KEY:latest" \
-    --set-env-vars "LHA_MODEL=gemini-3.7-flash,PORT=8080" \
+    --set-env-vars "LHA_MODEL=gemini-3.7-flash,USE_IN_MEMORY_SESSION=true,USE_IN_MEMORY_TASK_STORE=true" \
     --cpu 2 \
     --memory 2Gi \
     --concurrency 80 \
@@ -177,7 +182,8 @@ EOF
     --region "${REGION}" \
     --project "${PROJECT_ID}" \
     --service-account "${SA_EMAIL}" \
-    --set-env-vars "AGENT_A2A_URL=${AGENT_URL}/a2a,NODE_ENV=production,PORT=8080" \
+    --set-secrets "GEMINI_API_KEY=GEMINI_API_KEY:latest" \
+    --set-env-vars "AGENT_A2A_URL=${AGENT_URL}/a2a,NODE_ENV=production" \
     --cpu 1 \
     --memory 1Gi \
     --concurrency 80 \

@@ -77,7 +77,15 @@ cymbal-agentic-suite/
 
 ## 🚀 Quickstart (60-Second Evaluation)
 
-### 1. Launch via Docker Compose
+### 1. Live Deployed Cloud Run Demo (Immediate Evaluation)
+| Service | Live URL | Status | Description |
+| :--- | :--- | :--- | :--- |
+| **Storefront & Gemini Assistant** | [https://cymbal-storefront-r6vqjlotga-uc.a.run.app](https://cymbal-storefront-r6vqjlotga-uc.a.run.app) | `200 OK` | Next.js 15 Storefront & Buying Assistant |
+| **Interactive Demo Controls** | [https://cymbal-storefront-r6vqjlotga-uc.a.run.app/demo-controls](https://cymbal-storefront-r6vqjlotga-uc.a.run.app/demo-controls) | `200 OK` | Event generator for all 3 autonomous agent loops |
+| **Long Horizon Agent API** | [https://long-horizon-agent-r6vqjlotga-uc.a.run.app/a2a](https://long-horizon-agent-r6vqjlotga-uc.a.run.app/a2a) | `401 Auth Gated` | ADK 2.5 + FastAPI Agent-to-Agent JSON-RPC |
+| **Agent Readiness Probe** | [https://long-horizon-agent-r6vqjlotga-uc.a.run.app/ready](https://long-horizon-agent-r6vqjlotga-uc.a.run.app/ready) | `200 OK` | Service metadata & readiness probe |
+
+### 2. Launch via Docker Compose (Local)
 ```bash
 # Set your Gemini API Key
 export GEMINI_API_KEY="your-gemini-api-key"
@@ -86,7 +94,7 @@ export GEMINI_API_KEY="your-gemini-api-key"
 docker compose up --build
 ```
 
-### 2. Available Ports & Services
+### 3. Available Local Ports & Services
 | Surface | Local URL | Description |
 | :--- | :--- | :--- |
 | **Storefront & Demo Simulator** | `http://localhost:3000/demo-controls` | Interactive event generator for all 3 agent loops |
@@ -94,7 +102,7 @@ docker compose up --build
 | **Manager Incident Center** | `http://localhost:3000/manager/incidents/inc_001` | Escalation dossier with BigQuery & Places Insights evidence |
 | **Long Horizon Agent API** | `http://localhost:8000/a2a` | Python ADK 2.5 Agent-to-Agent JSON-RPC endpoint |
 
-### 3. Deploy to Google Cloud Run (1-Click)
+### 4. Deploy to Google Cloud Run (1-Click)
 ```bash
 # Automated deployment of Agent & Storefront with Secret Manager integration
 ./scripts/deploy_cloud_run.sh --project-id "your-gcp-project-id" --region us-central1
@@ -144,10 +152,12 @@ cd services/long-horizon-agent && uv run pytest tests/unit/test_exfil_guard.py t
 
 ### 2. Automated Programmatic Smoke Test Harness
 ```bash
-# Launch server, test /healthz, core endpoints, malformed error handling & graceful shutdown
-python scripts/smoke_test.py --target agent --port 8080
+# Test remote live Cloud Run deployment:
+python scripts/smoke_test.py --target remote-storefront --url https://cymbal-storefront-r6vqjlotga-uc.a.run.app
+python scripts/smoke_test.py --target remote-agent --url https://long-horizon-agent-r6vqjlotga-uc.a.run.app
 
-# Windows PowerShell 1-Click execution:
+# Or test local server processes:
+python scripts/smoke_test.py --target agent --port 8080
 .\scripts\smoke_test.ps1 -Target agent -Port 8080
 ```
 

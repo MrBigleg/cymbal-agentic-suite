@@ -84,6 +84,10 @@ gcloud projects add-iam-policy-binding $ProjectId `
     --member="serviceAccount:$saEmail" `
     --role="roles/secretmanager.secretAccessor" 2>$null | Out-Null
 
+gcloud projects add-iam-policy-binding $ProjectId `
+    --member="serviceAccount:$saEmail" `
+    --role="roles/aiplatform.user" 2>$null | Out-Null
+
 # 4. Check Secret Manager
 Write-Host "🔐 [4/6] Verifying Secret Manager secrets..." -ForegroundColor Yellow
 $secretExists = gcloud secrets describe "GEMINI_API_KEY" --project=$ProjectId 2>$null
@@ -113,7 +117,7 @@ if ($Target -eq "all" -or $Target -eq "agent") {
         --project $ProjectId `
         --service-account $saEmail `
         --set-secrets "GEMINI_API_KEY=GEMINI_API_KEY:latest" `
-        --set-env-vars "LHA_MODEL=gemini-3.7-flash,PORT=8080" `
+        --set-env-vars "LHA_MODEL=gemini-3.7-flash,USE_IN_MEMORY_SESSION=true,USE_IN_MEMORY_TASK_STORE=true" `
         --cpu 2 `
         --memory 2Gi `
         --concurrency 80 `
@@ -161,7 +165,8 @@ images:
         --region $Region `
         --project $ProjectId `
         --service-account $saEmail `
-        --set-env-vars "AGENT_A2A_URL=${agentUrl}/a2a,NODE_ENV=production,PORT=8080" `
+        --set-secrets "GEMINI_API_KEY=GEMINI_API_KEY:latest" `
+        --set-env-vars "AGENT_A2A_URL=${agentUrl}/a2a,NODE_ENV=production" `
         --cpu 1 `
         --memory 1Gi `
         --concurrency 80 `
