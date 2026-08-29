@@ -269,25 +269,35 @@ async function getCloudRunIdToken(targetAudience: string): Promise<string> {
 
 ---
 
+## 🌐 Live Deployed Demo & Endpoints
+
+The Cymbal Agentic Suite is deployed and running live on **Google Cloud Run** in `us-central1`:
+
+| Service | Endpoint URL | Status | Description |
+| :--- | :--- | :--- | :--- |
+| **Cymbal Storefront** | [https://cymbal-storefront-r6vqjlotga-uc.a.run.app](https://cymbal-storefront-r6vqjlotga-uc.a.run.app) | `200 OK` | Next.js 15 Storefront & Gemini Assistant |
+| **Interactive Demo Controls** | [https://cymbal-storefront-r6vqjlotga-uc.a.run.app/demo-controls](https://cymbal-storefront-r6vqjlotga-uc.a.run.app/demo-controls) | `200 OK` | Lifecycle & Agent Simulator UI |
+| **Long Horizon Agent** | [https://long-horizon-agent-r6vqjlotga-uc.a.run.app/a2a](https://long-horizon-agent-r6vqjlotga-uc.a.run.app/a2a) | `401 Auth Gated` | ADK 2.5 + FastAPI Agent-to-Agent (A2A) Endpoint |
+| **Agent Health Probe** | [https://long-horizon-agent-r6vqjlotga-uc.a.run.app/ready](https://long-horizon-agent-r6vqjlotga-uc.a.run.app/ready) | `200 OK` | Readiness probe & service metadata |
+
+---
+
 ## 🔍 7. Verification & Operational Troubleshooting
 
-### 7.1 Verify Health & Service Status
-```bash
-# Check service description & active revision
-gcloud run services describe long-horizon-agent --region ${REGION}
-
-# Check real-time logs
-gcloud run services logs tail long-horizon-agent --region ${REGION}
-```
+### 7.1 Key Troubleshooting & Resolution Notes
+* **Monorepo Lockfile Compatibility**: Storefront Dockerfile pins `pnpm@9.15.4` on `node:22-alpine` to ensure seamless `pnpm-lock.yaml` v9 resolution in Cloud Build.
+* **IAM Least Privilege**: Service account `cymbal-run-sa` requires `roles/secretmanager.secretAccessor` (for `GEMINI_API_KEY`) and `roles/aiplatform.user` (for Vertex AI backend calls).
+* **Hermetic Standalone State**: Cloud Run agent runs with `USE_IN_MEMORY_SESSION=true` and `USE_IN_MEMORY_TASK_STORE=true` for self-contained execution.
+* **Dynamic Port Contract**: Cloud Run automatically injects `$PORT`; avoid hardcoding port overrides.
 
 ### 7.2 Run Remote Smoke Tests
-Use the project smoke testing suite against your Cloud Run deployment:
+Use the project smoke testing suite against any Cloud Run deployment:
 ```bash
 # Test remote agent service
-python scripts/smoke_test.py --target agent --host ${AGENT_URL}
+python scripts/smoke_test.py --target remote-agent --url https://long-horizon-agent-r6vqjlotga-uc.a.run.app
 
 # Test remote storefront service
-python scripts/smoke_test.py --target storefront --host https://your-storefront-url.a.run.app
+python scripts/smoke_test.py --target remote-storefront --url https://cymbal-storefront-r6vqjlotga-uc.a.run.app
 ```
 
 ---
@@ -295,10 +305,9 @@ python scripts/smoke_test.py --target storefront --host https://your-storefront-
 ## 📝 Pre-Deployment Checklist
 
 - [ ] GCP Project selected and billing confirmed.
-- [ ] Required APIs enabled (`run`, `artifactregistry`, `cloudbuild`, `secretmanager`).
+- [ ] Required APIs enabled (`run`, `artifactregistry`, `cloudbuild`, `secretmanager`, `iam`, `aiplatform`).
 - [ ] Secret `GEMINI_API_KEY` created in Google Secret Manager.
-- [ ] Runtime Service Account created with `roles/secretmanager.secretAccessor`.
+- [ ] Runtime Service Account created with `roles/secretmanager.secretAccessor` and `roles/aiplatform.user`.
 - [ ] Docker container builds cleanly locally or via `gcloud builds submit`.
-- [ ] Port binding configured to listen on `0.0.0.0:${PORT}` (default `8080`).
 - [ ] Inter-service `AGENT_A2A_URL` mapped correctly in Storefront environment variables.
-- [ ] Smoke tests run and pass against the deployed endpoints.
+- [ ] Automated smoke tests pass cleanly (`python scripts/smoke_test.py`).

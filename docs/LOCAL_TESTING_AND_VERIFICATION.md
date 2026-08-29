@@ -120,6 +120,10 @@ python scripts/smoke_test.py --target agent --port 8080
 
 # Test against a pre-running container or deployed service URL:
 python scripts/smoke_test.py --target container --url http://127.0.0.1:8080
+
+# Test live Google Cloud Run deployments:
+python scripts/smoke_test.py --target remote-storefront --url https://cymbal-storefront-r6vqjlotga-uc.a.run.app
+python scripts/smoke_test.py --target remote-agent --url https://long-horizon-agent-r6vqjlotga-uc.a.run.app
 ```
 
 ---
