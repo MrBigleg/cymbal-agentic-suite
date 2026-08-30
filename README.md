@@ -3,7 +3,8 @@
 > **Built for the [Google #AllThingsAgenticHackathon](https://allthingsagentichackathon.devpost.com/) — The Fortified Enterprise Fleet Track (Startup Excellence)**  
 > An autonomous, protocol-driven commerce and reputation suite powered by **Google ADK 2.5**, **Gemini 3.7 Flash**, **Gemini 3.7 Pro / Thinking**, **Gemma**, **Imagen 3**, **Veo 2**, **Lyria**, **AP2 v0.2 (Autonomous Payment Protocol)**, **Agent-to-Agent (A2A)**, and **Universal Commerce Protocol (UCP)**.
 
-[![Demo Video](https://img.shields.io/badge/Watch-Demo_Video-red?style=for-the-badge&logo=youtube)](#) *(<- Link your video here!)*
+[![Demo Video](https://img.shields.io/badge/Watch-Demo_Video-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=6CvntW-b220)
+[![Engineering Blog](https://img.shields.io/badge/Read-Blog_Post-FF6F00?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.ctbmarketing.com/blog/human-in-the-loop-agentic-commerce)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](LICENSE)
 [![Cloud Run](https://img.shields.io/badge/Google_Cloud_Run-Deployed_Live-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://cymbal-storefront-r6vqjlotga-uc.a.run.app)
 [![Google ADK](https://img.shields.io/badge/Google_ADK-2.5_Orchestrator-34A853?style=for-the-badge&logo=google&logoColor=white)](#)
@@ -243,6 +244,8 @@ cymbal-agentic-suite/
 
 ## 📜 Documentation Directory
 
+- 📝 [**Engineering Blog: Human-in-the-Loop Agentic Commerce**](https://www.ctbmarketing.com/blog/human-in-the-loop-agentic-commerce)
+- 🎥 [**YouTube Demo Walkthrough Video**](https://www.youtube.com/watch?v=6CvntW-b220)
 - ☁️ [**Google Cloud Run Deployment Guide (Production & Serverless)**](docs/CLOUD_RUN_DEPLOYMENT_GUIDE.md)
 - 🧠 [**Google AI Multi-Model Portfolio & Architecture Guide**](docs/GOOGLE_AI_MODELS.md)
 - 🎨 [**Master Design System Specification (Wiry Neo-Brutalist)**](design.md)
