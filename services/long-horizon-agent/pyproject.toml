@@ -6,6 +6,7 @@
 name = "long-horizon-harness"
 version = "0.1.0"
 description = "Horizon — a self-improving long-horizon agent on Google ADK + Vertex AI"
+license = "Apache-2.0"
 # Core runtime — what `import horizon` + the default Gemini agent need. Provider
 # and subsystem deps live in [project.optional-dependencies] extras below so an
 # external harness can install a minimal slice; this repo's own dev/test env
